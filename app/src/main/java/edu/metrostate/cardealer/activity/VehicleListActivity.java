@@ -11,7 +11,7 @@ import android.widget.ListView;
 
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.Vehicle;
+import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.adapter.VehicleAdapter;
 
 public class VehicleListActivity extends AppCompatActivity {
@@ -48,8 +48,8 @@ public class VehicleListActivity extends AppCompatActivity {
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle("My alert")
                 .setCancelable(false)
-                .setTitle("Vehicle ID: " + vehicle.getId())
-                .setMessage("Model: " + vehicle.getModel())
+                .setTitle("Vehicle ID: " + vehicle.getVehicleID())
+                .setMessage("Model: " + vehicle.getVehicleModel())
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();

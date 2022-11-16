@@ -2,6 +2,8 @@ package edu.metrostate.cardealer.functionality;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,10 +55,28 @@ public class VehicleJSONParser {
 		return dealerGroup;
 	}
 
+	public static DealerGroup readAll(InputStream stream) {
+		DealerGroup dealerGroup = new DealerGroup();
+		try {
+			dealerGroup = mapper.readValue(stream, DealerGroup.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return dealerGroup;
+	}
+
 	// only for use with StateManager's save()
 	public static void writeAll(File file, DealerGroup dealerGroup) {
 		try {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealerGroup);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void writeAll(OutputStream stream, DealerGroup dealerGroup) {
+		try {
+			mapper.writerWithDefaultPrettyPrinter().writeValue(stream, dealerGroup);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

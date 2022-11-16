@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.inventory.Dealership;
+import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
+
 public class CarDealerApplication extends Application {
     private final List<Vehicle> vehicleList = new ArrayList<>();
 
@@ -16,11 +20,21 @@ public class CarDealerApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        try {
+            StateManager.load(getAssets().open("programState.json"));
 
-        //TODO: Remove this code
-        for(int i = 0; i < 20; i++) {
-            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
+            for (Dealership dealer: StateManager.dealerGroup.getDealers()) {
+                vehicleList.addAll(dealer.getVehicleInventory());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
+//        //TODO: Remove this code
+//        for(int i = 0; i < 20; i++) {
+//            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
+//        }
 
     }
 
