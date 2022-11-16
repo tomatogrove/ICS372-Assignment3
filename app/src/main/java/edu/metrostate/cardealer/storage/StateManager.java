@@ -1,23 +1,24 @@
 package edu.metrostate.cardealer.storage;
 
-import android.content.Context;
-import android.content.res.AssetManager;
-
 import edu.metrostate.cardealer.functionality.VehicleJSONParser;
 import edu.metrostate.cardealer.inventory.DealerGroup;
 
 import java.io.File;
-import java.io.InputStream;
 
 public class StateManager {
 
     //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
     public static DealerGroup dealerGroup;
-    private static final File storage = new File("src/main/assets/programState.json");
+    private static final File storage = new File("programState.json");
 
 
-    public static void load(InputStream stream) {
-        StateManager.dealerGroup = VehicleJSONParser.readAll(stream);
+    public static void load(File file) {
+        StateManager.dealerGroup = VehicleJSONParser.readAll(file);
+    }
+
+    public static void save(File file) {
+        File storageFile = new File(file, "programState.json");
+        VehicleJSONParser.writeAll(storageFile, StateManager.dealerGroup);
     }
 
     @Deprecated

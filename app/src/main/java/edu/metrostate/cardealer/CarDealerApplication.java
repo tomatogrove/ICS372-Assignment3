@@ -15,28 +15,25 @@ import edu.metrostate.cardealer.storage.StateManager;
 
 public class CarDealerApplication extends Application {
     private final List<Vehicle> vehicleList = new ArrayList<>();
+    private Boolean fileCreated = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        try {
-            StateManager.load(getAssets().open("programState.json"));
+        StateManager.load(getExternalFilesDir(null));
 
-            for (Dealership dealer: StateManager.dealerGroup.getDealers()) {
-                vehicleList.addAll(dealer.getVehicleInventory());
-            }
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Dealership dealer: StateManager.dealerGroup.getDealers()) {
+            vehicleList.addAll(dealer.getVehicleInventory());
         }
 
-//        //TODO: Remove this code
+        //        //TODO: Remove this code
 //        for(int i = 0; i < 20; i++) {
 //            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
 //        }
 
     }
+
 
     public List<Vehicle> getVehicleList() {
         return vehicleList;
@@ -49,7 +46,7 @@ public class CarDealerApplication extends Application {
         File externalDir = getExternalFilesDir(null);
 
         // Establishes the output file as "myfile.txt"
-        File outputFile = new File(externalDir, "myfile.txt");
+        File outputFile = new File(externalDir, "programState.txt");
 
         try {
             Files.createFile(outputFile.toPath());

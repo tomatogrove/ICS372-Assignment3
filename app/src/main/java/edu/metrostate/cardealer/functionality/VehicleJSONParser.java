@@ -47,20 +47,13 @@ public class VehicleJSONParser {
 	// only for use with StateManager's load()
 	public static DealerGroup readAll(File file) {
 		DealerGroup dealerGroup = new DealerGroup();
-		try {
-			dealerGroup = mapper.readValue(file, DealerGroup.class);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return dealerGroup;
-	}
 
-	public static DealerGroup readAll(InputStream stream) {
-		DealerGroup dealerGroup = new DealerGroup();
-		try {
-			dealerGroup = mapper.readValue(stream, DealerGroup.class);
-		} catch (IOException e) {
-			e.printStackTrace();
+		if (file.exists()) {
+			try {
+				dealerGroup = mapper.readValue(file, DealerGroup.class);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 		return dealerGroup;
 	}
@@ -69,14 +62,6 @@ public class VehicleJSONParser {
 	public static void writeAll(File file, DealerGroup dealerGroup) {
 		try {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealerGroup);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	public static void writeAll(OutputStream stream, DealerGroup dealerGroup) {
-		try {
-			mapper.writerWithDefaultPrettyPrinter().writeValue(stream, dealerGroup);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

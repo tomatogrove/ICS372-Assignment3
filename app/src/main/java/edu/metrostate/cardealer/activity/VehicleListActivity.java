@@ -13,8 +13,11 @@ import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.adapter.VehicleAdapter;
+import edu.metrostate.cardealer.storage.StateManager;
 
 public class VehicleListActivity extends AppCompatActivity {
+
+    CarDealerApplication app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +25,7 @@ public class VehicleListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_list);
 
         // Get the application instance from the activity
-        CarDealerApplication app = (CarDealerApplication) getApplication();
+        app = (CarDealerApplication) getApplication();
 
         // Create an adapter for the list view
         VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList());
@@ -31,17 +34,24 @@ public class VehicleListActivity extends AppCompatActivity {
         ListView vehicleList = ((ListView)findViewById(R.id.vehicle_list));
         vehicleList.setAdapter(adapter);
 
-        vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                showDialog(adapter.getItem(position));
-            }
-        });
-
-
-        // needs onPause method
+        vehicleList.setOnItemClickListener((parent, view, position, id) -> showDialog(adapter.getItem(position)));
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        StateManager.save(app.getExternalFilesDir(null));
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        StateManager.load(app.getExternalFilesDir(null));
+    }
+
 
     public void showDialog(Vehicle vehicle) {
 
