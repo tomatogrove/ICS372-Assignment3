@@ -1,4 +1,4 @@
-package edu.metrostate.cardealer;
+package edu.metrostate.cardealer.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.List;
+
+import edu.metrostate.cardealer.R;
+import edu.metrostate.cardealer.Vehicle;
 
 public class VehicleAdapter extends ArrayAdapter<Vehicle> {
     public VehicleAdapter(Context context, List<Vehicle> shelterList) {

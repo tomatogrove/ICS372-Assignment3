@@ -1,0 +1,95 @@
+{
+  "dealers" : [ {
+    "dealerID" : "1",
+    "vehicleAcquisition" : true,
+    "name" : "Wacky Dealer One",
+    "vehicleInventory" : [ {
+      "vehicleID" : "a",
+      "dealershipID" : "1",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Range Rover",
+      "vehicleManufacturer" : "Land Rover",
+      "unit" : "pounds",
+      "price" : 17000.0,
+      "acquisitionDate" : 1666828866193,
+      "rented" : true
+    }, {
+      "vehicleID" : "b",
+      "dealershipID" : "1",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Tundra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 22600.0,
+      "acquisitionDate" : 1666828866193,
+      "rented" : false
+    }, {
+      "vehicleID" : "c",
+      "dealershipID" : "1",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "G70",
+      "vehicleManufacturer" : "Genesis",
+      "unit" : "dollars",
+      "price" : 36600.0,
+      "acquisitionDate" : 1666828866193,
+      "rented" : false
+    }, {
+      "vehicleID" : "d",
+      "dealershipID" : "1",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Miata",
+      "vehicleManufacturer" : "Mazda",
+      "unit" : "dollars",
+      "price" : 22330.0,
+      "acquisitionDate" : 1666828866193,
+      "rented" : false
+    } ],
+    "renting" : true
+  }, {
+    "dealerID" : "2",
+    "vehicleAcquisition" : true,
+    "name" : "Quirky Dealer Two",
+    "vehicleInventory" : [ {
+      "vehicleID" : "1",
+      "dealershipID" : "2",
+      "vehicleType" : "suv",
+      "vehicleModel" : "Range Rover",
+      "vehicleManufacturer" : "Land Rover",
+      "unit" : "pounds",
+      "price" : 17000.0,
+      "acquisitionDate" : 1666828866197,
+      "rented" : false
+    }, {
+      "vehicleID" : "2",
+      "dealershipID" : "2",
+      "vehicleType" : "pickup",
+      "vehicleModel" : "Tundra",
+      "vehicleManufacturer" : "Toyota",
+      "unit" : "dollars",
+      "price" : 22600.0,
+      "acquisitionDate" : 1666828866197,
+      "rented" : false
+    }, {
+      "vehicleID" : "3",
+      "dealershipID" : "2",
+      "vehicleType" : "sedan",
+      "vehicleModel" : "G70",
+      "vehicleManufacturer" : "Genesis",
+      "unit" : "dollars",
+      "price" : 36600.0,
+      "acquisitionDate" : 1666828866197,
+      "rented" : false
+    }, {
+      "vehicleID" : "4",
+      "dealershipID" : "2",
+      "vehicleType" : "sports car",
+      "vehicleModel" : "Miata",
+      "vehicleManufacturer" : "Mazda",
+      "unit" : "dollars",
+      "price" : 22330.0,
+      "acquisitionDate" : 1666828866197,
+      "rented" : false
+    } ],
+    "renting" : false
+  } ]
+}

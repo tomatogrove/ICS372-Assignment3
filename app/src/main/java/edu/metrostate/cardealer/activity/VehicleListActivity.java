@@ -1,14 +1,18 @@
-package edu.metrostate.cardealer;
+package edu.metrostate.cardealer.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import edu.metrostate.cardealer.CarDealerApplication;
+import edu.metrostate.cardealer.R;
+import edu.metrostate.cardealer.Vehicle;
+import edu.metrostate.cardealer.adapter.VehicleAdapter;
 
 public class VehicleListActivity extends AppCompatActivity {
 
@@ -34,6 +38,8 @@ public class VehicleListActivity extends AppCompatActivity {
             }
         });
 
+
+        // needs onPause method
 
     }
 

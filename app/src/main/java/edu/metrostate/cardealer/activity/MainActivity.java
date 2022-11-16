@@ -1,10 +1,12 @@
-package edu.metrostate.cardealer;
+package edu.metrostate.cardealer.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import edu.metrostate.cardealer.R;
 
 public class MainActivity extends AppCompatActivity {
 
