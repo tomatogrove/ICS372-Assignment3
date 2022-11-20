@@ -9,8 +9,11 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.inventory.Dealership;
+
 public class CarDealerApplication extends Application {
-    private final List<Vehicle> vehicleList = new ArrayList<>();
+    private final List<Dealership> dealerList = new ArrayList<>();
+    private Dealership workingDealer;
 
     @Override
     public void onCreate() {
@@ -19,14 +22,24 @@ public class CarDealerApplication extends Application {
 
         //TODO: Remove this code
         for(int i = 0; i < 20; i++) {
-            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
+            dealerList.add(new Dealership(Integer.toString(i), "GlobalBrand " + i));
         }
 
     }
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
+    public Dealership getWorkingDealer() {
+        return workingDealer;
     }
+
+    public void setWorkingDealer(Dealership workingDealer) {
+        this.workingDealer = workingDealer;
+    }
+
+
+    public List<Dealership> getDealerList() {
+        return dealerList;
+    }
+
 
     public void writeFile() {
 

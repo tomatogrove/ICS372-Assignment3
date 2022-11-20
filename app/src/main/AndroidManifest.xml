@@ -14,7 +14,16 @@
         android:theme="@style/Theme.CarDealer"
         tools:targetApi="31">
         <activity
-            android:name=".activity.VehicleListActivity"
+            android:name=".activity.DealerInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dealer_info"
+            android:theme="@style/Theme.CarDealer.NoActionBar">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.DealerListActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

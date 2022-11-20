@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Create the intent with the new activity
-                Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
+                Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
 
                 // Launch the new Activity
                 startActivity(intent);
