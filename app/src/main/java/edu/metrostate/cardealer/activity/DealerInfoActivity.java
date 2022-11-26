@@ -2,19 +2,13 @@ package edu.metrostate.cardealer.activity;
 
 import android.os.Bundle;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
 import android.widget.TextView;
 
 
-import androidx.navigation.ui.AppBarConfiguration;
-
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.databinding.ActivityDealerInfoBinding;
 
 public class DealerInfoActivity extends AppCompatActivity {
 
@@ -27,7 +21,19 @@ public class DealerInfoActivity extends AppCompatActivity {
         // Get the application instance from the activity
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
+        TextView dealerID = findViewById(R.id.dealerID);
+        dealerID.setText(getString(R.string.Dealer_ID) + app.getWorkingDealer().getDealerID());
+
         TextView dealerName = findViewById(R.id.dealerName);
-        dealerName.setText(app.getWorkingDealer().getName());
+        dealerName.setText(getString(R.string.Dealer_Name) + app.getWorkingDealer().getName());
+
+        TextView dealerRenting = findViewById(R.id.dealerRenting);
+        dealerRenting.setText(getString(R.string.Dealer_Renting) + app.getWorkingDealer().isRenting());
+
+        TextView dealerAcquisition = findViewById(R.id.dealerAcquisition);
+        dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition) + app.getWorkingDealer().isVehicleAcquisition());
+
+        TextView dealerExport = findViewById(R.id.dealerExport);
+        dealerExport.setText(getString(R.string.Dealer_Export));
     }
 }
