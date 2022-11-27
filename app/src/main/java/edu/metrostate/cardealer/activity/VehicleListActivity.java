@@ -38,6 +38,7 @@ public class VehicleListActivity extends AppCompatActivity {
 
     }
 
+    // these two are not really necessary for the vehicle list activity since this activity is not changing state....
     @Override
     protected void onPause() {
         super.onPause();
@@ -63,8 +64,6 @@ public class VehicleListActivity extends AppCompatActivity {
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();
-
-
 
     }
 }

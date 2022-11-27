@@ -9,6 +9,7 @@ public class StateManager {
 
     //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
     public static DealerGroup dealerGroup;
+    @Deprecated
     private static final File storage = new File("programState.json");
 
 
