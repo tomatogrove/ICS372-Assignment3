@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,7 +29,7 @@ import edu.metrostate.cardealer.activity.util.TextChangedListener;
 import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
 
-public class NewVehicleFormActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
+public class NewVehicleFormActivity extends AppCompatActivity{
 
     private CarDealerApplication app;
     private Vehicle newVehicle;
@@ -75,9 +76,11 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
         save = findViewById(R.id.save_button);
         reset = findViewById(R.id.reset_button);
         setDate = findViewById(R.id.set_date);
-
         LocalDate today = LocalDate.now();
-        datePickerDialog = new DatePickerDialog(app, this, today.getYear(), today.getMonthValue(), today.getDayOfMonth());
+        setDate.setText(String.format("%d/%d/%d", today.getMonthValue(), today.getDayOfMonth(), today.getYear()));
+
+        datePickerDialog = new DatePickerDialog(this);
+
 
         // pattern from https://stackoverflow.com/questions/11134144/android-edittext-onchange-listener
         vehicleID.addTextChangedListener(new TextChangedListener() {
@@ -96,12 +99,24 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
             }
         });
 
-        vehicleTypeSpinner.setOnItemClickListener((adapterView, view, pos, l) -> {
-            String vehicleTypeValue = adapterView.getItemAtPosition(pos).toString();
-            if (!vehicleTypeValue.equals("sports car")) {
-                rented.setEnabled(true);
+        // from https://stackoverflow.com/questions/13097784/basic-spinner-example
+        vehicleTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                String vehicleTypeValue = adapterView.getItemAtPosition(pos).toString();
+                if (!vehicleTypeValue.equals("sports car")) {
+                    rented.setEnabled(true);
+                } else {
+                    rented.setEnabled(false);
+                    rented.setChecked(false);
+                    newVehicle.setRented(false);
+                    showRentingDisabledDialog();
+                }
+                newVehicle.setVehicleType(vehicleTypeValue);
             }
-            newVehicle.setVehicleType(vehicleTypeValue);
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
         });
 
         vehicleModel.addTextChangedListener(new TextChangedListener() {
@@ -158,10 +173,30 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
             datePickerDialog.show();
         });
 
+        // https://stackoverflow.com/questions/39916178/how-to-show-datepickerdialog-on-button-click
+        datePickerDialog.setOnDateSetListener((datePicker, year, month, day) -> {
+            setDate.setText(String.format("%d/%d/%d", month, day, year));
+            LocalDate localDate = LocalDate.of(year, month, day);
+            //erroring out line below
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            newVehicle.setAcquisitionDate(date);
+        });
+
+    }
+
+    private void showRentingDisabledDialog() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Renting Not Allowed")
+                .setCancelable(false)
+                .setMessage("Cannot rent out a vehicle that is a sports car.")
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
     }
 
     private void showSuccessDialog() {
         Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Save Success")
                 .setCancelable(false)
                 .setMessage("Vehicle " + newVehicle.getVehicleID() + " successfully saved.")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
@@ -171,6 +206,7 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
 
     private void showErrorDialog() {
         Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Save Unsuccessful")
                 .setCancelable(false)
                 .setMessage("Vehicle failed to save.\nInvalid fields.")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
@@ -179,19 +215,16 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
     }
 
     private boolean validateVehicle() {
-        if (newVehicle.getVehicleID() == null && newVehicle.getDealershipID() == null
-            && StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()) != null &&
-            StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()).isVehicleAcquisition()) {
-            return false;
-        }
-
-        return true;
+        return newVehicle.getVehicleID() != null || newVehicle.getDealershipID() != null
+                || StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()) == null ||
+                !StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()).isVehicleAcquisition();
     }
 
     private void resetVehicle() {
         newVehicle = new Vehicle();
         newVehicle.setRented(false);
         newVehicle.setUnit("dollars");
+        newVehicle.setVehicleType("suv");
         newVehicle.setAcquisitionDate(new Date(System.currentTimeMillis()));
     }
 
@@ -209,11 +242,5 @@ public class NewVehicleFormActivity extends AppCompatActivity implements DatePic
         StateManager.load(app.getExternalFilesDir(null));
     }
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        setDate.setText(String.format("%d/%d/%d", month, day, year));
-        LocalDate localDate = LocalDate.of(year, month, day);
-        Date date = Date.from(Instant.from(localDate));
-        newVehicle.setAcquisitionDate(date);
-    }
+
 }
