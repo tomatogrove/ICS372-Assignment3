@@ -43,6 +43,7 @@ public class Dealership {
     public boolean isVehicleAcquisition() {
         return vehicleAcquisition;
     }
+    public void setVehicleAcquisition(boolean acquiring) {vehicleAcquisition = acquiring; }
 
     public boolean isRenting() { return isRenting; }
     public void setRenting(boolean renting) { isRenting = renting; }

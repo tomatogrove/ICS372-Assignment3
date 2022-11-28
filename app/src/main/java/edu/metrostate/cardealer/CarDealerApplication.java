@@ -9,11 +9,13 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.inventory.DealerGroup;
 import edu.metrostate.cardealer.inventory.Dealership;
 
 public class CarDealerApplication extends Application {
     private final List<Dealership> dealerList = new ArrayList<>();
     private Dealership workingDealer;
+    private DealerGroup groupOfDealers;
 
     @Override
     public void onCreate() {
@@ -30,6 +32,7 @@ public class CarDealerApplication extends Application {
     public Dealership getWorkingDealer() {
         return workingDealer;
     }
+    public DealerGroup getGroupOfDealers() {return groupOfDealers;}
 
     public void setWorkingDealer(Dealership workingDealer) {
         this.workingDealer = workingDealer;
