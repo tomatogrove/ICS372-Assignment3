@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,13 +49,12 @@ public class VehicleJSONParser {
 	public static DealerGroup readAll(File file) {
 		DealerGroup dealerGroup = new DealerGroup();
 
-		if (file.exists()) {
-			try {
-				dealerGroup = mapper.readValue(file, DealerGroup.class);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		try {
+			dealerGroup = mapper.readValue(file, DealerGroup.class);
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
+
 		return dealerGroup;
 	}
 

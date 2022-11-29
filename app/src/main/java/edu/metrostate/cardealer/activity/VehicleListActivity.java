@@ -28,30 +28,30 @@ public class VehicleListActivity extends AppCompatActivity {
         app = (CarDealerApplication) getApplication();
 
         // Create an adapter for the list view
-        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList());
+        VehicleAdapter adapter = new VehicleAdapter(this);
 
         // Find the list view and add the adapter
-        ListView vehicleList = ((ListView)findViewById(R.id.vehicle_list));
+        ListView vehicleList = findViewById(R.id.vehicle_list);
         vehicleList.setAdapter(adapter);
 
         vehicleList.setOnItemClickListener((parent, view, position, id) -> showDialog(adapter.getItem(position)));
 
     }
 
-    // these two are not really necessary for the vehicle list activity since this activity is not changing state....
-    @Override
-    protected void onPause() {
-        super.onPause();
+//    // these two are not really necessary for the vehicle list activity since this activity is not changing state....
+//    @Override
+//    protected void onPause() {
+//        super.onPause();
+//
+//        StateManager.save(app.getStateFile());
+//    }
 
-        StateManager.save(app.getExternalFilesDir(null));
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        StateManager.load(app.getExternalFilesDir(null));
-    }
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+//
+//        StateManager.load(app.getStateFile());
+//    }
 
 
     public void showDialog(Vehicle vehicle) {

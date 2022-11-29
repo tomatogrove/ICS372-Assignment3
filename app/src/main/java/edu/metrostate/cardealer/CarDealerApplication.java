@@ -14,20 +14,21 @@ import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class CarDealerApplication extends Application {
-    private final List<Vehicle> vehicleList = new ArrayList<>();
-    private Boolean fileCreated = false;
+//    private final List<Vehicle> vehicleList = new ArrayList<>();
+    private File stateFile;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        StateManager.load(getExternalFilesDir(null));
+        setStateFile();
+        StateManager.load(getStateFile());
 
-        for (Dealership dealer: StateManager.dealerGroup.getDealers()) {
-            vehicleList.addAll(dealer.getVehicleInventory());
-        }
+//        for (Dealership dealer: StateManager.dealerGroup.getDealers()) {
+//            vehicleList.addAll(dealer.getVehicleInventory());
+//        }
 
-        //        //TODO: Remove this code
+//        //TODO: Remove this code
 //        for(int i = 0; i < 20; i++) {
 //            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
 //        }
@@ -35,8 +36,27 @@ public class CarDealerApplication extends Application {
     }
 
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
+//    public List<Vehicle> getVehicleList() {
+//        return vehicleList;
+//    }
+
+    public File getStateFile() {
+        return stateFile;
+    }
+
+
+    private void setStateFile() {
+        File externalDir = getExternalFilesDir(null);
+        File outputFile = new File(externalDir, "programState.json");
+
+        if (!(outputFile.exists() && outputFile.isFile())) {
+            try {
+                Files.createFile(outputFile.toPath());
+            } catch (IOException ex) {
+                Log.e("FileCreation", "Error creating file", ex);
+            }
+        }
+        stateFile = outputFile;
     }
 
     public void writeFile() {

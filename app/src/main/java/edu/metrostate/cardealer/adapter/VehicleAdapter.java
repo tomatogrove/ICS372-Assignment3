@@ -10,14 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.List;
-
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
 
 public class VehicleAdapter extends ArrayAdapter<Vehicle> {
-    public VehicleAdapter(Context context, List<Vehicle> shelterList) {
-        super(context, R.layout.vehicle_item, shelterList);
+    public VehicleAdapter(Context context) {
+        super(context, R.layout.vehicle_item, StateManager.dealerGroup.getAllVehicles());
     }
 
 

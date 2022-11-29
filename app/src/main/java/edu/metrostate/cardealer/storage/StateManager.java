@@ -18,8 +18,7 @@ public class StateManager {
     }
 
     public static void save(File file) {
-        File storageFile = new File(file, "programState.json");
-        VehicleJSONParser.writeAll(storageFile, StateManager.dealerGroup);
+        VehicleJSONParser.writeAll(file, StateManager.dealerGroup);
     }
 
     @Deprecated
