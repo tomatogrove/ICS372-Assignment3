@@ -1,18 +1,18 @@
 <resources>
     <string name="app_name">CarDealer</string>
     <string name="title_activity_dealer_info">DealerInfoActivity</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
     <string name="Dealer_Name">Dealer name: </string>
-    <string name="Dealer_ID">Dealer ID: </string>
+    <string name="Dealer_ID"><u>Dealer ID: </u></string>
     <string name="Dealer_Renting">Renting Status: </string>
+    <string name="Dealer_Rent_Button_Label"><u>Rent</u></string>
     <string name="Dealer_VehicleAcquisition">Acquisition Status: </string>
-    <string name="Dealer_Transfer">Transfer inventory to: </string>
+    <string name="Dealer_Transfer"><u>Transfer inventory to</u></string>
     <string name="Dealer_Export">Export: </string>
+    <string name="Dealer_Name_Change"><u>Dealer Name Change</u></string>
+    <string name="Dealer_Acquisition_Button_Label"><u>Vehicle Acquisition</u></string>
 
     <string name="enable">enable</string>
     <string name="disable">disable</string>
