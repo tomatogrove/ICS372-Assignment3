@@ -1,8 +1,11 @@
 package edu.metrostate.cardealer.inventory;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Date;
 
-public class Vehicle {
+public class Vehicle implements Parcelable {
 
 	private String vehicleID;
 	private String dealershipID;
@@ -28,7 +31,22 @@ public class Vehicle {
 		this.acquisitionDate = acquisitionDate;
 		rented = false;
 	}
+	private Vehicle(Parcel in) {
+		this.vehicleID = in.readString();
+		this.dealershipID =in.readString();
+		this.vehicleType = in.readString();
+		this.vehicleModel = in.readString();
+		this.vehicleManufacturer = in.readString();
+		String priceValue = 	String.valueOf(this.price);
+		priceValue	= in.readString();
+		this.unit = in.readString();
+		String acquisition_date = String.valueOf(this.acquisitionDate);
+		acquisition_date = in.readString();
+		String rent = String.valueOf(rented);
+		rent	= in.readString();
 
+
+	}
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
 			Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
@@ -111,4 +129,33 @@ public class Vehicle {
 		Vehicle vehicle = (Vehicle) o;
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel parcel, int i) {
+	parcel.writeString(vehicleID);
+		parcel.writeString( dealershipID);
+		parcel.writeString(vehicleType);
+		parcel.writeString(vehicleModel);
+		parcel.writeString(vehicleManufacturer);
+		parcel.writeString(unit);
+		parcel.writeString(String.valueOf(price));
+		parcel.writeString(String.valueOf(acquisitionDate));
+		parcel.writeString(String.valueOf(rented));
+	}
+	public static final Creator<Vehicle> CREATOR = new Creator<Vehicle>() {
+		public Vehicle createFromParcel(Parcel in) {
+			return new Vehicle(in);
+		}
+
+		public Vehicle[] newArray(int size) {
+			return new Vehicle[size];
+
+		}
+	};
+
 }
