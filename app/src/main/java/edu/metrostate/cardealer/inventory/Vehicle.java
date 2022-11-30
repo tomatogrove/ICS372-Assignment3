@@ -17,7 +17,7 @@ public class Vehicle {
 	public Vehicle() {}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
-				   Double price, String unit, Date acquisitionDate) {
+		   Double price, String unit, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -30,7 +30,7 @@ public class Vehicle {
 	}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
-				   Double price, Date acquisitionDate) {
+			Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
