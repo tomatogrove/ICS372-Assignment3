@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".functionality.Vehicle_ImportFile">
+    tools:context=".activity.Vehicle_ImportFileActivity">
     <TextView
         android:id="@+id/title_frame"
         android:layout_width="wrap_content"
@@ -29,13 +29,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="162dp"
-        android:layout_marginTop="54dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="163dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="8dp"
         android:text="@string/xmlpath"
         android:textColor="@color/purple_700"
         app:layout_constraintBottom_toTopOf="@+id/xml_btn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -44,9 +45,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="123dp"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="123dp"
-        android:layout_marginBottom="21dp"
+        android:layout_marginBottom="16dp"
         android:onClick="buttonXmlFile"
         android:text="@string/btnxml"
         app:layout_constraintBottom_toTopOf="@+id/json_path"
@@ -61,7 +62,7 @@
         android:layout_marginStart="162dp"
         android:layout_marginTop="21dp"
         android:layout_marginEnd="162dp"
-        android:layout_marginBottom="28dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/jsonpath"
         android:textColor="@color/purple_700"
         app:layout_constraintBottom_toTopOf="@+id/json_btn"
@@ -74,9 +75,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="116dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="121dp"
-        android:layout_marginBottom="41dp"
+        android:layout_marginBottom="16dp"
         android:onClick="buttonJsonFile"
         android:text="@string/btnjson"
         app:layout_constraintBottom_toTopOf="@+id/send_data"
@@ -89,16 +90,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="114dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="114dp"
-        android:layout_marginBottom="73dp"
+        android:layout_marginBottom="32dp"
         android:text="@string/sendFileList"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/json_btn"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/json_btn" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -128,4 +127,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/json_btn" />
+
+    <Button
+        android:id="@+id/add_vehicle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="37dp"
+        android:layout_marginEnd="139dp"
+        android:layout_marginBottom="29dp"
+        android:clickable="true"
+        android:text="@string/add_vehicle_btn"
+        app:layout_constraintBottom_toTopOf="@+id/xml_path"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        android:onClick="addVehicle"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

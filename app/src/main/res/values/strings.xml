@@ -31,4 +31,5 @@
     <string name="titleFileList">Vehicle List</string>
     <string name="clear_json_path">Clear</string>
     <string name="clear_xml_path">Clear</string>
+    <string name="add_vehicle_btn">Add Vehicle</string>
 </resources>

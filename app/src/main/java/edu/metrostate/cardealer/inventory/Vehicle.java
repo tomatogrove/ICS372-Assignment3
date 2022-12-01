@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import java.util.Date;
 
-public class Vehicle implements Parcelable {
+public class Vehicle {
 
 	private String vehicleID;
 	private String dealershipID;
@@ -130,32 +130,5 @@ public class Vehicle implements Parcelable {
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
 
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel parcel, int i) {
-	parcel.writeString(vehicleID);
-		parcel.writeString( dealershipID);
-		parcel.writeString(vehicleType);
-		parcel.writeString(vehicleModel);
-		parcel.writeString(vehicleManufacturer);
-		parcel.writeString(unit);
-		parcel.writeString(String.valueOf(price));
-		parcel.writeString(String.valueOf(acquisitionDate));
-		parcel.writeString(String.valueOf(rented));
-	}
-	public static final Creator<Vehicle> CREATOR = new Creator<Vehicle>() {
-		public Vehicle createFromParcel(Parcel in) {
-			return new Vehicle(in);
-		}
-
-		public Vehicle[] newArray(int size) {
-			return new Vehicle[size];
-
-		}
-	};
 
 }

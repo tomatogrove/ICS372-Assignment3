@@ -1,4 +1,4 @@
-package edu.metrostate.cardealer.functionality;
+package edu.metrostate.cardealer.activity;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -25,13 +25,19 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
+import edu.metrostate.cardealer.functionality.VehicleJSONParser;
+import edu.metrostate.cardealer.functionality.VehicleXMLParser;
+import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
 
-public class Vehicle_ImportFile extends AppCompatActivity {
+public class Vehicle_ImportFileActivity extends AppCompatActivity {
     String path;
-    ArrayList<Vehicle> vehicles;
-
+    List<Dealership> vehicles;
+    List<Vehicle> vehicleJson;
+    private CarDealerApplication app;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +45,7 @@ public class Vehicle_ImportFile extends AppCompatActivity {
 
         Button send_button= findViewById(R.id.send_data);
         send_button.setOnClickListener(v -> {
-            Intent intent = new Intent(this, Vehicle_ViewList.class);
-
-
-            Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList("vehiclelist_data", vehicles);
-            intent.putExtras(bundle);
+            Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
             startActivity(intent);
 
         });}
@@ -133,7 +134,7 @@ public class Vehicle_ImportFile extends AppCompatActivity {
                                 final TextView jsonField = findViewById(R.id.json_path);
                                 jsonField.setText(path);
 
-                                vehicles = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
+                                vehicleJson = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
                                 errorField.setText("Wrong File Format");
@@ -165,7 +166,7 @@ public class Vehicle_ImportFile extends AppCompatActivity {
                             path = file.getAbsolutePath();
                         }
                         if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
-                        {
+                        {   vehicles = VehicleXMLParser.read(file);
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
                         }else{
@@ -177,4 +178,16 @@ public class Vehicle_ImportFile extends AppCompatActivity {
                 }
             }
     );
+    public void addVehicle(){
+        //need to change to Mike class
+        Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
+        startActivity(intent);
+    }
+    @Override
+    protected void onPause() {
+        app = (CarDealerApplication) getApplication();
+        super.onPause();
+
+        StateManager.save();
+    }
 }
