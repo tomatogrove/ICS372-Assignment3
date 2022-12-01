@@ -55,6 +55,8 @@ public class Dealership {
         if (vehicle.getVehicleType().equalsIgnoreCase("SUV") || vehicle.getVehicleType().equalsIgnoreCase("Sedan") || vehicle.getVehicleType().equalsIgnoreCase("Pickup") || vehicle.getVehicleType().equalsIgnoreCase("Sports Car")) {
             if (vehicleAcquisition) {
                 if (vehicleInventory.contains(vehicle)) {
+
+                    // if truly breaks the app, then maybe need to copy and edit list.....?
                     Vehicle removeVehicle = getVehicleById(vehicle.getVehicleID());
                     vehicleInventory.remove(removeVehicle);
                 }

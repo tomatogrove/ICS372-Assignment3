@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context=".activity.VehicleListActivity">
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Vehicle Form"
+        android:textSize="25sp"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"/>
+
+    <TextView
+        android:id="@+id/vehicle_id_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Vehicle ID: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_id"
+    />
+
+
+    <EditText
+        android:id="@+id/vehicle_id"
+        android:textSize="15sp"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="10dp"
+        android:hint="Enter vehicleID"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+    />
+
+    <TextView
+        android:id="@+id/dealer_id_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Dealer ID: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@id/dealer_id"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
+    <EditText
+        android:id="@+id/dealer_id"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:hint="Enter dealerID"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_id"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_type_label"
+        android:textSize="15sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="Vehicle Type: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dealer_id"
+        />
+
+<!--    <EditText-->
+<!--        android:id="@+id/vehicle_type"-->
+<!--        android:textSize="15sp"-->
+<!--        android:hint="Enter vehicle type"-->
+<!--        android:inputType="text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/dealer_id"-->
+<!--        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"-->
+<!--        />-->
+    <Spinner
+        android:id="@+id/vehicle_type_spinner"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/vehicle_type_label"
+        app:layout_constraintTop_toBottomOf="@id/dealer_id"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_model_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Vehicle Model: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_model"
+        />
+
+
+    <EditText
+        android:id="@+id/vehicle_model"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:hint="Enter vehicle model"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_type_label"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_manufacturer_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Vehicle \nManufacturer: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_manufacturer"
+        />
+
+
+    <EditText
+        android:id="@+id/vehicle_manufacturer"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:hint="Enter vehicle manufacturer"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_model"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_price_unit_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Price and Unit: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_price"
+        />
+
+
+    <EditText
+        android:id="@+id/vehicle_price"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:hint="Enter vehicle price"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_manufacturer"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+        />
+    <EditText
+        android:id="@+id/vehicle_unit"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:hint="dollars, pounds, etc"
+        android:inputType="text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_manufacturer"
+        app:layout_constraintStart_toEndOf="@id/vehicle_price"
+        />
+
+    <TextView
+        android:id="@+id/vehicle_acquisition_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Acquisition Date: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/set_date"
+        />
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/vehicle_acquisition"-->
+<!--        android:textSize="15sp"-->
+<!--        android:layout_margin="10dp"-->
+<!--        android:hint="Enter Acquisition Date"-->
+<!--        android:inputType="text"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/vehicle_price"-->
+<!--        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"-->
+<!--        />-->
+    <Button
+        android:id="@+id/set_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:backgroundTint="#D8D8D8"
+        android:text="Select Date"
+        android:textColor="#5C5C5C"
+        app:layout_constraintTop_toBottomOf="@id/vehicle_price"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+    />
+
+
+    <TextView
+        android:id="@+id/vehicle_rented_label"
+        android:textSize="15sp"
+        android:layout_margin="10dp"
+        android:text="Vehicle Rented: "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/vehicle_rented"
+        />
+
+
+    <CheckBox
+        android:id="@+id/vehicle_rented"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/set_date"
+        app:layout_constraintStart_toEndOf="@id/vehicle_model_label"
+    />
+
+    <Button
+        android:id="@+id/save_button"
+        android:text="Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/vehicle_id_label"
+    />
+
+    <Button
+        android:id="@+id/reset_button"
+        android:text="Reset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/dealer_id"
+        />
+
+<!--    <ListView-->
+<!--        android:id="@+id/vehicle_list"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/title"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

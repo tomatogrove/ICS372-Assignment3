@@ -1,5 +1,7 @@
 package edu.metrostate.cardealer.inventory;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -25,6 +27,15 @@ public class DealerGroup {
 			}
 		}
 		return getDealer;
+	}
+
+	@JsonIgnore
+	public List<Vehicle> getAllVehicles() {
+		List<Vehicle> vehicles = new ArrayList<>();
+		for (Dealership dealer : dealers) {
+			vehicles.addAll(dealer.getVehicleInventory());
+		}
+		return vehicles;
 	}
 	
 	public String displayDealerVehicles() {

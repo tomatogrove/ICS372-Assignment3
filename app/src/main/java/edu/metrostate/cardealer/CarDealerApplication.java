@@ -9,46 +9,40 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.inventory.Dealership;
+import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
+
 public class CarDealerApplication extends Application {
-    private final List<Vehicle> vehicleList = new ArrayList<>();
+    private static File stateFile;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-
-        //TODO: Remove this code
-        for(int i = 0; i < 20; i++) {
-            vehicleList.add(new Vehicle(Integer.toString(i), "Model " + i));
-        }
+        setStateFile();
+        StateManager.load();
 
     }
 
-    public List<Vehicle> getVehicleList() {
-        return vehicleList;
+
+    public static File getStateFile() {
+        return stateFile;
     }
 
-    public void writeFile() {
 
-        //TODO: Remove this code
-        // Gets the output path which is /sdcard/Android/data/edu.metrostate.cardealer/files directory
+    private void setStateFile() {
         File externalDir = getExternalFilesDir(null);
+        File outputFile = new File(externalDir, "programState.json");
 
-        // Establishes the output file as "myfile.txt"
-        File outputFile = new File(externalDir, "myfile.txt");
-
-        try {
-            Files.createFile(outputFile.toPath());
-
-            // Saves the string "My data" to the file
-            Files.write(outputFile.toPath(), "My data".getBytes());
-
-        } catch (IOException ex) {
-            Log.e("FileCreation", "Error creating file", ex);
+        if (!(outputFile.exists() && outputFile.isFile())) {
+            try {
+                Files.createFile(outputFile.toPath());
+            } catch (IOException ex) {
+                Log.e("FileCreation", "Error creating file", ex);
+            }
         }
-
+        stateFile = outputFile;
     }
-
-
 
 }
