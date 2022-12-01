@@ -15,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // these will change at least a little based on what is on the main screen
         findViewById(R.id.show_vehicle).setOnClickListener(v -> {
             // Create the intent with the new activity
             Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);

@@ -20,11 +20,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.activity.util.TextChangedListener;
+import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
 
@@ -35,14 +35,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
     private EditText vehicleID;
     private EditText dealershipID;
-//    private EditText vehicleType;
     private Spinner vehicleTypeSpinner;
     private EditText vehicleModel;
     private EditText vehicleManufacturer;
     private EditText unit;
     private EditText price;
-    private EditText acquisitionDate;
-    private Date acquisitionDateValue;
     private Button setAcquisitionDate;
     private CheckBox rented;
     private Button save;
@@ -56,20 +53,23 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
         app = (CarDealerApplication) getApplication();
 
+        // edit text
         vehicleID = findViewById(R.id.vehicle_id);
         dealershipID = findViewById(R.id.dealer_id);
-//        vehicleType = findViewById(R.id.vehicle_type);
         vehicleModel = findViewById(R.id.vehicle_model);
         vehicleManufacturer = findViewById(R.id.vehicle_manufacturer);
         unit = findViewById(R.id.vehicle_unit);
         price = findViewById(R.id.vehicle_price);
-//        acquisitionDate = findViewById(R.id.vehicle_acquisition);
         rented = findViewById(R.id.vehicle_rented);
+
+        // spinner
         vehicleTypeSpinner = findViewById(R.id.vehicle_type_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.vehicle_types, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vehicleTypeSpinner.setAdapter(adapter);
+
+        // buttons
         save = findViewById(R.id.save_button);
         reset = findViewById(R.id.reset_button);
         setAcquisitionDate = findViewById(R.id.set_date);
@@ -81,17 +81,6 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
 
         // pattern from https://stackoverflow.com/questions/11134144/android-edittext-onchange-listener
-        vehicleID.addTextChangedListener(new TextChangedListener() {
-            @Override
-            public void afterTextChanged(Editable s) {
-                super.afterTextChanged(s);
-                if (vehicleID.getText().toString().equals("")) {
-                    newVehicle.setVehicleID(null);
-                }
-                newVehicle.setVehicleID(vehicleID.getText().toString());
-            }
-        });
-
         dealershipID.addTextChangedListener(new TextChangedListener() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -103,25 +92,6 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             }
         });
 
-        // from https://stackoverflow.com/questions/13097784/basic-spinner-example
-        vehicleTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
-                String vehicleTypeValue = adapterView.getItemAtPosition(pos).toString();
-                if (!vehicleTypeValue.equals("sports car")) {
-                    rented.setEnabled(true);
-                } else {
-                    rented.setEnabled(false);
-                    rented.setChecked(false);
-                    newVehicle.setRented(false);
-                    showInvalidFieldDialog("Cannot rent out a vehicle that is a sports car.");
-                }
-                newVehicle.setVehicleType(vehicleTypeValue);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) { }
-        });
 
         vehicleModel.addTextChangedListener(new TextChangedListener() {
             @Override
@@ -156,19 +126,6 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             }
         });
 
-//        price.setOnFocusChangeListener((v, hasFocus) -> {
-//            if (!hasFocus) {
-//                if (price.getText().toString().equals("")) {
-//                    newVehicle.setPrice(null);
-//                } else {
-//                    try {
-//                        newVehicle.setPrice(Double.valueOf(price.getText().toString()));
-//                    } catch (NumberFormatException e) {
-//                        showInvalidFieldDialog("Value entered is not a valid price!");
-//                    }
-//                }
-//            }
-//        });
         price.addTextChangedListener(new TextChangedListener() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -186,8 +143,28 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         });
 
 
-
         rented.setOnCheckedChangeListener((buttonView, isChecked) -> newVehicle.setRented(isChecked));
+
+        // from https://stackoverflow.com/questions/13097784/basic-spinner-example
+        vehicleTypeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id) {
+                String vehicleTypeValue = adapterView.getItemAtPosition(pos).toString();
+                if (!vehicleTypeValue.equals("sports car")) {
+                    rented.setEnabled(true);
+                } else {
+                    rented.setEnabled(false);
+                    rented.setChecked(false);
+                    newVehicle.setRented(false);
+                    showInvalidFieldDialog("Cannot rent out a vehicle that is a sports car.");
+                }
+                newVehicle.setVehicleType(vehicleTypeValue);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) { }
+        });
+
 
         save.setOnClickListener( v -> {
             List<String> errors = validateVehicle();
@@ -201,16 +178,6 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             } else {
                 showErrorDialog(errors);
             }
-
-//            if (validateVehicle()) {
-//                List<Vehicle> vehicle = new ArrayList<>();
-//                vehicle.add(newVehicle);
-//                StateManager.dealerGroup.addIncomingVehicles(vehicle);
-//                showSuccessDialog();
-//                resetVehicle();
-//            } else {
-//                showErrorDialog();
-//            }
         });
 
         reset.setOnClickListener(v -> {
@@ -256,10 +223,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         for (String error : errors) {
             builder.append(error);
         }
+        
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Save Unsuccessful")
                 .setCancelable(false)
-                .setMessage("Vehicle failed to save due to the following reasons:\n\n" + builder)
+                .setMessage("Vehicle failed to save due to the following reason(s):\n\n" + builder)
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();
@@ -271,15 +239,19 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         if (newVehicle.getVehicleID() == null) {
             errors.add("Vehicle ID is a required field.\n");
         }
+
         if (newVehicle.getDealershipID() == null) {
             errors.add("Dealer ID is a required field.\n");
         } else if (StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()) != null){
-            if (!StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()).isVehicleAcquisition()) {
+            Dealership dealer = StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID());
+            if (!dealer.isVehicleAcquisition()) {
                 errors.add("Dealer " + newVehicle.getDealershipID() + " is not accepting new vehicles.\n");
             }
-            if (!StateManager.dealerGroup.getDealerByID(newVehicle.getDealershipID()).isRenting()
-                && newVehicle.isRented()) {
+            if (!dealer.isRenting() && newVehicle.isRented()) {
                 errors.add("Dealer " + newVehicle.getDealershipID() + " is not renting out vehicles.\n");
+            }
+            if (dealer.getVehicleById(newVehicle.getVehicleID()) != null) {
+                errors.add("Dealer " + newVehicle.getDealershipID() + " already has vehicle " + newVehicle.getVehicleID());
             }
         }
         if (newVehicle.getVehicleModel() == null) {
@@ -321,13 +293,5 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
         StateManager.save(app.getStateFile());
     }
-
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        StateManager.load(app.getStateFile());
-//    }
-
 
 }
