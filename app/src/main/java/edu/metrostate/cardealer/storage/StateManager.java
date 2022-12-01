@@ -10,25 +10,16 @@ public class StateManager {
     //lets panels change dealerGroup with class methods like addIncomingVehicles() etc
     public static DealerGroup dealerGroup;
     @Deprecated
-    private static final File storage = new File("programState.json");
 
 
-    public static void load(File file) {
-        StateManager.dealerGroup = VehicleJSONParser.readAll(file);
+    public static void load() {
+        StateManager.dealerGroup = VehicleJSONParser.readAll();
     }
 
-    public static void save(File file) {
-        VehicleJSONParser.writeAll(file, StateManager.dealerGroup);
+    public static void save() {
+        VehicleJSONParser.writeAll();
     }
 
-    @Deprecated
-    private static void load() {
-        StateManager.dealerGroup = VehicleJSONParser.readAll(storage);
-    }
 
-    @Deprecated
-    private static void save() {
-        VehicleJSONParser.writeAll(storage, StateManager.dealerGroup);
-    }
 
 }

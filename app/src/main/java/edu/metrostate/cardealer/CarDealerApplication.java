@@ -14,19 +14,19 @@ import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class CarDealerApplication extends Application {
-    private File stateFile;
+    private static File stateFile;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         setStateFile();
-        StateManager.load(getStateFile());
+        StateManager.load();
 
     }
 
 
-    public File getStateFile() {
+    public static File getStateFile() {
         return stateFile;
     }
 

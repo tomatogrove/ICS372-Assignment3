@@ -2,15 +2,15 @@ package edu.metrostate.cardealer.functionality;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.inventory.DealerGroup;
 import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,11 +46,11 @@ public class VehicleJSONParser {
 
 
 	// only for use with StateManager's load()
-	public static DealerGroup readAll(File file) {
+	public static DealerGroup readAll() {
 		DealerGroup dealerGroup = new DealerGroup();
 
 		try {
-			dealerGroup = mapper.readValue(file, DealerGroup.class);
+			dealerGroup = mapper.readValue(CarDealerApplication.getStateFile(), DealerGroup.class);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,9 +59,9 @@ public class VehicleJSONParser {
 	}
 
 	// only for use with StateManager's save()
-	public static void writeAll(File file, DealerGroup dealerGroup) {
+	public static void writeAll() {
 		try {
-			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealerGroup);
+			mapper.writerWithDefaultPrettyPrinter().writeValue(CarDealerApplication.getStateFile(), StateManager.dealerGroup);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

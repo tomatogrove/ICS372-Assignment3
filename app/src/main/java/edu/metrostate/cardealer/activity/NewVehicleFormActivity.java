@@ -223,7 +223,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         for (String error : errors) {
             builder.append(error);
         }
-        
+
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Save Unsuccessful")
                 .setCancelable(false)
@@ -291,7 +291,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
     protected void onPause() {
         super.onPause();
 
-        StateManager.save(app.getStateFile());
+        StateManager.save();
     }
 
 }
