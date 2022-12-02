@@ -23,7 +23,22 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".activity.DealerListActivity"
+                android:name=".activity.DealerListActivity"
+                android:exported="true">
+            <meta-data
+                    android:name="android.app.lib_name2"
+                    android:value="" />
+        </activity>
+
+        <activity
+            android:name=".activity.NewVehicleFormActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
