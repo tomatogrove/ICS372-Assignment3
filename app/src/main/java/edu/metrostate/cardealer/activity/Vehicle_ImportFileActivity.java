@@ -21,10 +21,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.metrostate.cardealer.CarDealerApplication;
+
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.functionality.VehicleJSONParser;
 import edu.metrostate.cardealer.functionality.VehicleXMLParser;
@@ -34,9 +33,9 @@ import edu.metrostate.cardealer.storage.StateManager;
 
 public class Vehicle_ImportFileActivity extends AppCompatActivity {
     String path;
-    List<Dealership> vehicles;
+    List<Dealership> dealers;
     List<Vehicle> vehicleJson;
-    private CarDealerApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,7 +141,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                                 final TextView jsonField = findViewById(R.id.json_path);
                                 jsonField.setText(path);
 
-                                vehicleJson = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
+                                vehicleJson = VehicleJSONParser.read(file);
                                StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
 
                             }else{
@@ -177,8 +176,8 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         }
                         if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
                         {
-                            vehicles = VehicleXMLParser.read(file);
-                            StateManager.dealerGroup.addIncomingDealers(vehicles);
+                            dealers = VehicleXMLParser.read(file);
+                            StateManager.dealerGroup.addIncomingDealers(dealers);
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
                         }else{
@@ -192,14 +191,12 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     );
     public void addVehicle(){
         //need to change to Mike class
-        Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
+        Intent intent = new Intent(this, NewVehicleFormActivity.class);
         startActivity(intent);
     }
     @Override
     protected void onPause() {
-        app = (CarDealerApplication) getApplication();
         super.onPause();
-
         StateManager.save();
     }
 }
