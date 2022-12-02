@@ -10,14 +10,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.List;
-
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.inventory.Dealership;
+import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.storage.StateManager;
 
-public class DealerAdapter extends ArrayAdapter<Dealership> {
-    public DealerAdapter(Context context, List<Dealership> shelterList) {
-        super(context, R.layout.dealer_item, shelterList);
+public class VehicleAdapter extends ArrayAdapter<Vehicle> {
+    public VehicleAdapter(Context context) {
+        super(context, R.layout.vehicle_item, StateManager.dealerGroup.getAllVehicles());
     }
 
 
@@ -26,15 +25,15 @@ public class DealerAdapter extends ArrayAdapter<Dealership> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if(convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.dealer_item, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.vehicle_item, parent, false);
         }
 
-        TextView id = convertView.findViewById(R.id.dealership_id);
-        TextView dealershipName = convertView.findViewById(R.id.dealership_name);
+        TextView id = convertView.findViewById(R.id.vehicle_id);
+        TextView model = convertView.findViewById(R.id.vehicle_model);
 
 
-        id.setText(getItem(position).getDealerID());
-        dealershipName.setText(getItem(position).getName());
+        id.setText(getItem(position).getVehicleID());
+        model.setText(getItem(position).getVehicleModel());
 
         return convertView;
     }
