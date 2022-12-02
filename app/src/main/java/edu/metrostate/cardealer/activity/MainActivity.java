@@ -17,16 +17,16 @@ public class MainActivity extends AppCompatActivity {
         // these will change at least a little based on what is on the main screen
         findViewById(R.id.show_vehicle).setOnClickListener(v -> {
             // Create the intent with the new activity
-            Intent intent = new Intent(MainActivity.this, VehicleListActivity.class);
+            Intent intent = new Intent(MainActivity.this, Vehicle_ImportFileActivity.class);
 
             // Launch the new Activity
             startActivity(intent);
         });
 
-        findViewById(R.id.add_vehicle).setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, NewVehicleFormActivity.class);
-            startActivity(intent);
-        });
+//        findViewById(R.id.dealers).setOnClickListener(v -> {
+//            Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
+//            startActivity(intent);
+//        });
 
     }
 }

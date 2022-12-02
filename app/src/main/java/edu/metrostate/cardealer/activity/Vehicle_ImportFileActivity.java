@@ -46,7 +46,15 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
             Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
             startActivity(intent);
 
-        });}
+        });
+
+        Button addButton = findViewById(R.id.add_vehicle);
+        addButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, NewVehicleFormActivity.class);
+            startActivity(intent);
+
+        });
+    }
 
     private void assets_copy() {
         AssetManager assetManager = getAssets();
@@ -189,11 +197,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                 }
             }
     );
-    public void addVehicle(){
-        //need to change to Mike class
-        Intent intent = new Intent(this, NewVehicleFormActivity.class);
-        startActivity(intent);
-    }
+
     @Override
     protected void onPause() {
         super.onPause();
