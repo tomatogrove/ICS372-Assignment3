@@ -143,6 +143,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                                 jsonField.setText(path);
 
                                 vehicleJson = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
+                               StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
                                 for(Vehicle vehicle : vehicleJson){
     System.out.println(vehicle.toString());
                                 }
@@ -177,8 +178,9 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                             path = file.getAbsolutePath();
                         }
                         if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
-                        {   vehicles = VehicleXMLParser.read(file);
-
+                        {
+                            vehicles = VehicleXMLParser.read(file);
+                            StateManager.dealerGroup.addIncomingDealers(vehicles);
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
                         }else{
