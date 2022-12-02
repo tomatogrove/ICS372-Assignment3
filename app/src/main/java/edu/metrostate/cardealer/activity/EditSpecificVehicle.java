@@ -3,11 +3,18 @@ package edu.metrostate.cardealer.activity;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
+import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
+import edu.metrostate.cardealer.Vehicle;
+import edu.metrostate.cardealer.adapter.VehicleAdapter;
 
 public class EditSpecificVehicle extends AppCompatActivity {
 
@@ -17,17 +24,45 @@ public class EditSpecificVehicle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_specific_vehicle);
 
-        findViewById(R.id.show_edit_specific_vehicle).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Create the intent with the new activity
-                Intent intent = new Intent(EditSpecificVehicle.this, VehicleListActivity.class);
+        // Get the application instance from the activity
+        CarDealerApplication app = (CarDealerApplication) getApplication();
 
-                // Launch the new Activity
-                startActivity(intent);
+        // Create an adapter for the list view
+        VehicleAdapter adapter = new VehicleAdapter(this, app.getVehicleList());
+
+        // Find the list view and add the adapter
+        ListView vehicleList = ((ListView)findViewById(R.id.vehicle_list));
+        vehicleList.setAdapter(adapter);
+
+        vehicleList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showDialog(adapter.getItem(position));
             }
         });
     }
 
+    public void showDialog(Vehicle vehicle) {
 
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Edit Rental Status");
+        builder.setCancelable(true);
+        builder.setTitle("Vehicle ID: " + vehicle.getId());
+        builder.setMessage("Rental Status: " + vehicle.isRented());
+        builder.setMessage("Press 'Update' to change the rental status");
+        builder.setNegativeButton("Cancel",(dialog1, id) -> dialog1.cancel());
+        builder.setPositiveButton( "Update", (dialog1, id) -> editRentalStatus(vehicle));
+
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+    }
+
+    public void editRentalStatus(Vehicle vehicle){
+        if(vehicle.isRented()){
+            vehicle.setRented(false);
+        } else {
+            vehicle.setRented(true);
+        }
+    }
 }
