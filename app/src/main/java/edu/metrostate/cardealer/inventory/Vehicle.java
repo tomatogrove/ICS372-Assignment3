@@ -29,6 +29,8 @@ public class Vehicle {
 		rented = false;
 	}
 
+
+	}
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
 			Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
