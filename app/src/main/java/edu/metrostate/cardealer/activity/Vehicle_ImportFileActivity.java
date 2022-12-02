@@ -21,10 +21,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
 import java.util.List;
 
-import edu.metrostate.cardealer.CarDealerApplication;
+
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.functionality.VehicleJSONParser;
 import edu.metrostate.cardealer.functionality.VehicleXMLParser;
@@ -36,7 +35,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     String path;
     List<Dealership> dealers;
     List<Vehicle> vehicleJson;
-    private CarDealerApplication app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
