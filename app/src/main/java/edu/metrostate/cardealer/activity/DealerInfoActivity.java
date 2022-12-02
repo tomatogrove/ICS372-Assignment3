@@ -1,6 +1,7 @@
 package edu.metrostate.cardealer.activity;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -50,7 +51,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         //transferring inventory
         EditText transferInventory = findViewById(R.id.recipient);
         Button transfer = findViewById(R.id.transferTo);
-        transfer.setOnClickListener(v -> app.getGroupOfDealers().transferInventory(app.getWorkingDealer().getDealerID(), transferInventory.getText().toString()));
+        transfer.setOnClickListener(v -> StateManager.dealerGroup.transferInventory(app.getWorkingDealer().getDealerID(), transferInventory.getText().toString()));
 
 
         //exporting inventory information to JSON
@@ -97,8 +98,8 @@ public class DealerInfoActivity extends AppCompatActivity {
         //Navigating to the next screen
         Button nextScreen = findViewById(R.id.viewInventory);
         nextScreen.setOnClickListener(v -> {
-            //Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
-            //startActivity(intent);
+            Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
+            startActivity(intent);
         });
 
 

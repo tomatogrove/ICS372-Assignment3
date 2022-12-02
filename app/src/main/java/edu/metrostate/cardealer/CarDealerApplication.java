@@ -16,21 +16,13 @@ import edu.metrostate.cardealer.inventory.Dealership;
 
 public class CarDealerApplication extends Application {
     private static File stateFile;
-    private final List<Dealership> dealerList = new ArrayList<>();
     private Dealership workingDealer;
-    private DealerGroup groupOfDealers;
 
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-
-        //TODO: Remove this code
-        
-        for(int i = 0; i < 20; i++) {
-            dealerList.add(new Dealership(Integer.toString(i), "GlobalBrand " + i));
-        }
         setStateFile();
         StateManager.load();
 
@@ -40,7 +32,6 @@ public class CarDealerApplication extends Application {
     public static File getStateFile() {
         return stateFile;
     }
-    public DealerGroup getGroupOfDealers() {return groupOfDealers;}
     public Dealership getWorkingDealer() {return workingDealer;}
 
     public void setWorkingDealer(Dealership workingDealer) {
@@ -49,7 +40,7 @@ public class CarDealerApplication extends Application {
 
 
     public List<Dealership> getDealerList() {
-        return dealerList;
+        return StateManager.dealerGroup.getDealers();
     }
 
 
