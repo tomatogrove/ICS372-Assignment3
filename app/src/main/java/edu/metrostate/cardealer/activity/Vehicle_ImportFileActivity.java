@@ -144,9 +144,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
 
                                 vehicleJson = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
                                StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
-                                for(Vehicle vehicle : vehicleJson){
-    System.out.println(vehicle.toString());
-                                }
+
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
                                 errorField.setText("Wrong File Format");
