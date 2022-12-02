@@ -12,9 +12,18 @@ import android.widget.ListView;
 
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.adapter.DealerAdapter;
+import edu.metrostate.cardealer.adapter.DealershipAdapter;
+import edu.metrostate.cardealer.storage.StateManager;
 
 public class DealerListActivity extends AppCompatActivity {
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        StateManager.save();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +34,10 @@ public class DealerListActivity extends AppCompatActivity {
         CarDealerApplication app = (CarDealerApplication) getApplication();
 
         // Create an adapter for the list view
-        DealerAdapter adapter = new DealerAdapter(this, app.getDealerList());
+        DealershipAdapter adapter = new DealershipAdapter(this, app.getDealerList()); //replace app.getDealerList() with StateManager.dealerGroup.getDealers()
 
         // Find the list view and add the adapter
-        ListView dealerListAdapter = ((ListView)findViewById(R.id.dealer_list));
+        ListView dealerListAdapter = (findViewById(R.id.dealer_list));
         dealerListAdapter.setAdapter(adapter);
 
         dealerListAdapter.setOnItemClickListener((parent, view, position, id) -> {

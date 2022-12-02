@@ -17,12 +17,14 @@ public class CarDealerApplication extends Application {
     private Dealership workingDealer;
     private DealerGroup groupOfDealers;
 
+
+
     @Override
     public void onCreate() {
         super.onCreate();
 
 
-        //TODO: Remove this code
+        //TODO: Remove this code (testing purposes)
         for(int i = 0; i < 20; i++) {
             dealerList.add(new Dealership(Integer.toString(i), "GlobalBrand " + i));
         }

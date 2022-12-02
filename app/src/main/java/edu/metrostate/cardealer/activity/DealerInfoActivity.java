@@ -13,9 +13,16 @@ import android.widget.TextView;
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.functionality.VehicleJSONParser;
+import edu.metrostate.cardealer.storage.StateManager;
 
 public class DealerInfoActivity extends AppCompatActivity {
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+
+        StateManager.save();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,7 +97,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         //Navigating to the next screen
         Button nextScreen = findViewById(R.id.viewInventory);
         nextScreen.setOnClickListener(v -> {
-            //Intent intent = new Intent(DealerInfoActivity.this, **Name of Mike's activity.class**);
+            //Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
             //startActivity(intent);
         });
 
