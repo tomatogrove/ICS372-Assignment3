@@ -1,8 +1,5 @@
 package edu.metrostate.cardealer.inventory;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.util.Date;
 
 public class Vehicle {
@@ -20,7 +17,7 @@ public class Vehicle {
 	public Vehicle() {}
 
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
-		   Double price, String unit, Date acquisitionDate) {
+				   Double price, String unit, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -31,24 +28,9 @@ public class Vehicle {
 		this.acquisitionDate = acquisitionDate;
 		rented = false;
 	}
-	private Vehicle(Parcel in) {
-		this.vehicleID = in.readString();
-		this.dealershipID =in.readString();
-		this.vehicleType = in.readString();
-		this.vehicleModel = in.readString();
-		this.vehicleManufacturer = in.readString();
-		String priceValue = 	String.valueOf(this.price);
-		priceValue	= in.readString();
-		this.unit = in.readString();
-		String acquisition_date = String.valueOf(this.acquisitionDate);
-		acquisition_date = in.readString();
-		String rent = String.valueOf(rented);
-		rent	= in.readString();
 
-
-	}
 	public Vehicle(String vehicleID, String dealershipID, String vehicleType, String vehicleModel, String vehicleManufacturer,
-			Double price, Date acquisitionDate) {
+				   Double price, Date acquisitionDate) {
 		this.vehicleID = vehicleID;
 		this.dealershipID = dealershipID;
 		this.vehicleType = vehicleType;
@@ -129,6 +111,4 @@ public class Vehicle {
 		Vehicle vehicle = (Vehicle) o;
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
-
-
 }
