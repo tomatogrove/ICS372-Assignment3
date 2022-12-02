@@ -1,21 +1,20 @@
 package edu.metrostate.cardealer.activity;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,45 +41,54 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_import_file);
-
+        assets_copy();
         Button send_button= findViewById(R.id.send_data);
         send_button.setOnClickListener(v -> {
             Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
             startActivity(intent);
 
         });}
-    private void copyAssets() {
+
+    private void assets_copy() {
         AssetManager assetManager = getAssets();
         String[] files = null;
-
         try {
             files = assetManager.list("");
         } catch (IOException e) {
             Log.e("tag", "Failed to get asset file list.", e);
         }
-        if (files != null) {
-            for(String filename : files) {
-                InputStream in;
-                OutputStream out;
-                try {
-                    in = assetManager.open(filename);
-
-                    String outDir = Environment.getExternalStorageDirectory().getAbsolutePath() + "/Documents" ;
-
-                    File outFile = new File(outDir, filename);
-
+        if (files != null) for (String filename : files) {
+            InputStream in = null;
+            OutputStream out = null;
+            try {
+                in = assetManager.open(filename);
+                File outFile = new File(getExternalFilesDir(null), filename);
+                if (!(outFile.exists())) {
                     out = new FileOutputStream(outFile);
-                    copyFile(in, out);
-                    in.close();
-                    out.flush();
-                    out.close();
-                } catch(IOException e) {
-                    Log.e("tag", "Failed to copy asset file: " + filename, e);
+                    copy_storage(in, out);
+                }
+            } catch(IOException e) {
+                Log.e("tag", "Failed to copy asset file: " + filename, e);
+            }
+            finally {
+                if (in != null) {
+                    try {
+                        in.close();
+                    } catch (IOException e) {
+
+                    }
+                }
+                if (out != null) {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+
+                    }
                 }
             }
         }
     }
-    private void copyFile(InputStream in, OutputStream out) throws IOException {
+    private void copy_storage(InputStream in, OutputStream out) throws IOException {
         byte[] buffer = new byte[1024];
         int read;
         while((read = in.read(buffer)) != -1){
@@ -89,14 +97,14 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     }
 
     public void buttonJsonFile(View view){
-        copyAssets();
+
         Intent data = new Intent(Intent.ACTION_GET_CONTENT);
         data.setType("*/*");
         data = Intent.createChooser(data, "Choose a File");
         jsonActivityResultLauncher.launch(data);
     }
     public void buttonXmlFile(View view){
-        copyAssets();
+
         Intent data = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         data.setType("*/*");
         data = Intent.createChooser(data, "Choose a File");
@@ -135,6 +143,9 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                                 jsonField.setText(path);
 
                                 vehicleJson = (ArrayList<Vehicle>) VehicleJSONParser.read(file);
+                                for(Vehicle vehicle : vehicleJson){
+    System.out.println(vehicle.toString());
+                                }
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
                                 errorField.setText("Wrong File Format");
@@ -167,6 +178,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         }
                         if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
                         {   vehicles = VehicleXMLParser.read(file);
+
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
                         }else{

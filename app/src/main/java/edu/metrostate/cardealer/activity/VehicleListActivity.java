@@ -17,15 +17,13 @@ import edu.metrostate.cardealer.storage.StateManager;
 
 public class VehicleListActivity extends AppCompatActivity {
 
-    CarDealerApplication app;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_list);
 
         // Get the application instance from the activity
-        app = (CarDealerApplication) getApplication();
+        CarDealerApplication app = (CarDealerApplication) getApplication();
 
         // Create an adapter for the list view
         VehicleAdapter adapter = new VehicleAdapter(this);
@@ -38,20 +36,8 @@ public class VehicleListActivity extends AppCompatActivity {
 
     }
 
-//    // these two are not really necessary for the vehicle list activity since this activity is not changing state....
-//    @Override
-//    protected void onPause() {
-//        super.onPause();
-//
-//        StateManager.save(app.getStateFile());
-//    }
 
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//
-//        StateManager.load(app.getStateFile());
-//    }
+        // needs onPause method
 
 
     public void showDialog(Vehicle vehicle) {
@@ -64,6 +50,8 @@ public class VehicleListActivity extends AppCompatActivity {
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();
+
+
 
     }
 }
