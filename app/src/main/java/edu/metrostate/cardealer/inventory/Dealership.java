@@ -1,9 +1,10 @@
 package edu.metrostate.cardealer.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dealership {
+public class Dealership implements Serializable {
     private String dealerID;
     private boolean vehicleAcquisition;
     private String name;

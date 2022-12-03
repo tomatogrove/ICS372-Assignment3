@@ -32,11 +32,8 @@ public class DealerListActivity extends AppCompatActivity implements Serializabl
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_list);
 
-        // Get the application instance from the activity
-        CarDealerApplication app = (CarDealerApplication) getApplication();
-
         // Create an adapter for the list view
-        DealershipAdapter adapter = new DealershipAdapter(this, app.getDealerList()); //replace app.getDealerList() with StateManager.dealerGroup.getDealers()
+        DealershipAdapter adapter = new DealershipAdapter(this, StateManager.dealerGroup.getDealers());
 
         // Find the list view and add the adapter
         ListView dealerListAdapter = (findViewById(R.id.dealer_list));

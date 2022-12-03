@@ -31,12 +31,6 @@ public class CarDealerApplication extends Application {
         return stateFile;
     }
 
-    public List<Dealership> getDealerList() {
-        return StateManager.dealerGroup.getDealers();
-    }
-
-
-
     private void setStateFile() {
         File externalDir = getExternalFilesDir(null);
         File outputFile = new File(externalDir, "programState.json");
