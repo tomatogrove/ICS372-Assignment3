@@ -11,9 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import java.io.Serializable;
+
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.functionality.VehicleJSONParser;
+import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class DealerInfoActivity extends AppCompatActivity {
@@ -30,20 +33,19 @@ public class DealerInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_info);
 
-        // Get the application instance from the activity
-        CarDealerApplication app = (CarDealerApplication) getApplication();
+        Dealership workingDealer = (Dealership)getIntent().getSerializableExtra("workingDealer");
+
 
         TextView dealerID = findViewById(R.id.dealerID);
-        dealerID.setText(getString(R.string.Dealer_ID, app.getWorkingDealer().getDealerID()));
-
+        dealerID.setText(getString(R.string.Dealer_ID, workingDealer.getDealerID()));
         TextView dealerName = findViewById(R.id.dealerName);
-        dealerName.setText(getString(R.string.Dealer_Name, app.getWorkingDealer().getName()));
+        dealerName.setText(getString(R.string.Dealer_Name, workingDealer.getName()));
 
         TextView dealerRenting = findViewById(R.id.dealerRenting);
-        dealerRenting.setText(getString(R.string.Dealer_Renting, app.getWorkingDealer().isRenting()));
+        dealerRenting.setText(getString(R.string.Dealer_Renting, workingDealer.isRenting()));
 
         TextView dealerAcquisition = findViewById(R.id.dealerAcquisition);
-        dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, app.getWorkingDealer().isVehicleAcquisition()));
+        dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, workingDealer.isVehicleAcquisition()));
 
         TextView dealerExport = findViewById(R.id.dealerExport);
         dealerExport.setText(getString(R.string.Dealer_Export));
@@ -51,13 +53,13 @@ public class DealerInfoActivity extends AppCompatActivity {
         //transferring inventory
         EditText transferInventory = findViewById(R.id.recipient);
         Button transfer = findViewById(R.id.transferTo);
-        transfer.setOnClickListener(v -> StateManager.dealerGroup.transferInventory(app.getWorkingDealer().getDealerID(), transferInventory.getText().toString()));
+        transfer.setOnClickListener(v -> StateManager.dealerGroup.transferInventory(workingDealer.getDealerID(), transferInventory.getText().toString()));
 
 
         //exporting inventory information to JSON
         Button exportJSON = findViewById(R.id.JSON);
         exportJSON.setOnClickListener(v -> {
-            VehicleJSONParser.write(app.getWorkingDealer());
+            VehicleJSONParser.write(workingDealer);
             //this is sending the application back to the DealerListActivity for some reason
         });
 
@@ -65,40 +67,42 @@ public class DealerInfoActivity extends AppCompatActivity {
         EditText newName = findViewById(R.id.newName);
         Button changeName = findViewById(R.id.changeName);
         changeName.setOnClickListener(v -> {
-            app.getWorkingDealer().setName(newName.getText().toString());
-            dealerName.setText(getString(R.string.Dealer_Name, app.getWorkingDealer().getName()));
+
+            workingDealer.setName(newName.getText().toString());
+            dealerName.setText(getString(R.string.Dealer_Name, workingDealer.getName()));
         });
 
         //changing ability to rent
         Button enableRenting = findViewById(R.id.enableRent);
         enableRenting.setOnClickListener(v -> {
-            app.getWorkingDealer().setRenting(true);
-            dealerRenting.setText(getString(R.string.Dealer_Renting, app.getWorkingDealer().isRenting()));
+            workingDealer.setRenting(true);
+            dealerRenting.setText(getString(R.string.Dealer_Renting, workingDealer.isRenting()));
         });
 
         Button disableRenting = findViewById(R.id.disableRent);
         disableRenting.setOnClickListener(v -> {
-            app.getWorkingDealer().setRenting(false);
-            dealerRenting.setText(getString(R.string.Dealer_Renting, app.getWorkingDealer().isRenting()));
+            workingDealer.setRenting(false);
+            dealerRenting.setText(getString(R.string.Dealer_Renting, workingDealer.isRenting()));
         });
 
         //changing ability to acquire vehicles
         Button enableAcquisition = findViewById(R.id.enableVehicleAcquisition);
         enableAcquisition.setOnClickListener(v -> {
-            app.getWorkingDealer().setVehicleAcquisition(true);
-            dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, app.getWorkingDealer().isVehicleAcquisition()));
+            workingDealer.setVehicleAcquisition(true);
+            dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, workingDealer.isVehicleAcquisition()));
         });
 
         Button disableAcquisition = findViewById(R.id.disableVehicleAcquisition);
         disableAcquisition.setOnClickListener(v -> {
-            app.getWorkingDealer().setVehicleAcquisition(false);
-            dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, app.getWorkingDealer().isVehicleAcquisition()));
+            workingDealer.setVehicleAcquisition(false);
+            dealerAcquisition.setText(getString(R.string.Dealer_VehicleAcquisition, workingDealer.isVehicleAcquisition()));
         });
 
         //Navigating to the next screen
         Button nextScreen = findViewById(R.id.viewInventory);
         nextScreen.setOnClickListener(v -> {
             Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
+            intent.putExtra("workingDealer", (Serializable) workingDealer);
             startActivity(intent);
         });
 

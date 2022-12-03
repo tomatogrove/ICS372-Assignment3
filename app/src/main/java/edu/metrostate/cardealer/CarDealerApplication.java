@@ -16,7 +16,6 @@ import edu.metrostate.cardealer.inventory.Dealership;
 
 public class CarDealerApplication extends Application {
     private static File stateFile;
-    private Dealership workingDealer;
 
 
 
@@ -28,16 +27,9 @@ public class CarDealerApplication extends Application {
 
     }
 
-
     public static File getStateFile() {
         return stateFile;
     }
-    public Dealership getWorkingDealer() {return workingDealer;}
-
-    public void setWorkingDealer(Dealership workingDealer) {
-        this.workingDealer = workingDealer;
-    }
-
 
     public List<Dealership> getDealerList() {
         return StateManager.dealerGroup.getDealers();

@@ -10,12 +10,14 @@ import android.os.Bundle;
 //import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.Serializable;
+
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.adapter.DealershipAdapter;
 import edu.metrostate.cardealer.storage.StateManager;
 
-public class DealerListActivity extends AppCompatActivity {
+public class DealerListActivity extends AppCompatActivity implements Serializable {
 
     @Override
     protected void onPause() {
@@ -42,9 +44,9 @@ public class DealerListActivity extends AppCompatActivity {
 
         dealerListAdapter.setOnItemClickListener((parent, view, position, id) -> {
             //showDialog(adapter.getItem(position));
-            app.setWorkingDealer(adapter.getItem(position));
             // Create the intent with the new activity
             Intent intent = new Intent(DealerListActivity.this, DealerInfoActivity.class);
+            intent.putExtra("workingDealer", (Serializable) adapter.getItem(position));
             startActivity(intent);
         });
 
