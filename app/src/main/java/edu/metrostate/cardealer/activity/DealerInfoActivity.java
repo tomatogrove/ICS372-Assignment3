@@ -32,8 +32,8 @@ public class DealerInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_info);
-
-        Dealership workingDealer = (Dealership)getIntent().getSerializableExtra("workingDealer");
+        Bundle selectedDealer = getIntent().getExtras();
+        Dealership workingDealer = StateManager.dealerGroup.getDealerByID(selectedDealer.getString("workingDealerID"));
 
 
         TextView dealerID = findViewById(R.id.dealerID);
@@ -102,7 +102,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         Button nextScreen = findViewById(R.id.viewInventory);
         nextScreen.setOnClickListener(v -> {
             Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
-            intent.putExtra("workingDealer", (Serializable) workingDealer);
+            intent.putExtra("workingDealerID", workingDealer.getDealerID());
             startActivity(intent);
         });
 

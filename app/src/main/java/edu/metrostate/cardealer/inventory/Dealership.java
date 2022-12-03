@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Dealership implements Serializable {
+public class Dealership {
     private String dealerID;
     private boolean vehicleAcquisition;
     private String name;

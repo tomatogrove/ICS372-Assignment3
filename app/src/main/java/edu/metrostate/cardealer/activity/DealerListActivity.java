@@ -17,7 +17,7 @@ import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.adapter.DealershipAdapter;
 import edu.metrostate.cardealer.storage.StateManager;
 
-public class DealerListActivity extends AppCompatActivity implements Serializable {
+public class DealerListActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
@@ -43,7 +43,7 @@ public class DealerListActivity extends AppCompatActivity implements Serializabl
             //showDialog(adapter.getItem(position));
             // Create the intent with the new activity
             Intent intent = new Intent(DealerListActivity.this, DealerInfoActivity.class);
-            intent.putExtra("workingDealer", (Serializable) adapter.getItem(position));
+            intent.putExtra("workingDealerID", adapter.getItem(position).getDealerID());
             startActivity(intent);
         });
 
