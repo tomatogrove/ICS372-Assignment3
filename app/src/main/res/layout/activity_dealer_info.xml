@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.DealerInfoActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/AppBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.CarDealer.AppBarOverlay">
+
+
+        <TextView
+            android:id="@+id/dealerID"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Dealer_ID"
+            android:textAlignment="center"
+            android:textSize="36sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <TextView
+        android:id="@+id/dealerName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/AppBarLayout"
+        android:text="@string/Dealer_Name"
+        android:layout_gravity="start"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+         />
+
+    <TextView
+        android:id="@+id/dealerRenting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Renting"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/dealerName"/>
+
+    <TextView
+        android:id="@+id/dealerAcquisition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_VehicleAcquisition"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/dealerRenting"/>
+
+    <TextView
+        android:id="@+id/dealerTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Transfer"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/dealerAcquisition"
+        android:layout_marginTop="30sp"/>
+
+    <EditText
+        android:id="@+id/recipient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:hint="@string/receiving_dealer_field"
+        android:autofillHints=""
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:layout_below="@id/dealerTransfer"
+        />
+
+    <Button
+        android:id="@+id/transferTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/transfer_button_label"
+        android:textSize="16sp"
+        android:layout_toEndOf="@+id/recipient"
+        android:layout_alignBaseline="@+id/recipient"
+        android:layout_marginStart="5sp"
+        />
+
+
+    <TextView
+        android:id="@+id/dealerExport"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Export"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/recipient"
+        android:layout_marginTop="20sp"/>
+
+    <Button
+        android:id="@+id/JSON"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/export_button_label"
+        android:textSize="16sp"
+        android:layout_toEndOf="@+id/dealerExport"
+        android:layout_alignBaseline="@+id/dealerExport"
+        android:layout_marginStart="5sp"
+        />
+
+    <TextView
+        android:id="@+id/NameChange"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Name_Change"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/dealerExport"
+        android:layout_marginTop="30sp"/>
+
+    <EditText
+        android:id="@+id/newName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="24sp"
+        android:hint="@string/new_dealer_name_field"
+        android:autofillHints=""
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:layout_below="@id/NameChange"
+        />
+
+    <Button
+        android:id="@+id/changeName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Change_Name_Button_Label"
+        android:textSize="16sp"
+        android:layout_toEndOf="@+id/newName"
+        android:layout_alignBaseline="@+id/newName"
+        android:layout_marginStart="5sp"
+        />
+
+
+    <TextView
+        android:id="@+id/Rent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Rent_Ability"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/newName"
+        android:layout_marginTop="30sp"/>
+
+    <Button
+        android:id="@+id/enableRent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enable"
+        android:textSize="16sp"
+        android:layout_below="@+id/Rent"
+        />
+
+    <Button
+        android:id="@+id/disableRent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disable"
+        android:textSize="16sp"
+        android:layout_marginStart="10sp"
+        android:layout_toEndOf="@+id/enableRent"
+        android:layout_alignBaseline="@+id/enableRent"/>
+
+    <TextView
+        android:id="@+id/Acquisition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Dealer_Acquisition_Button_Label"
+        android:textSize="24sp"
+        android:layout_gravity="start"
+        android:layout_below="@id/enableRent"
+        android:layout_marginTop="30sp"/>
+
+    <Button
+        android:id="@+id/enableVehicleAcquisition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enable"
+        android:textSize="16sp"
+        android:layout_below="@+id/Acquisition"
+        />
+
+    <Button
+        android:id="@+id/disableVehicleAcquisition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/disable"
+        android:textSize="16sp"
+        android:layout_marginStart="10sp"
+        android:layout_toEndOf="@+id/enableVehicleAcquisition"
+        android:layout_alignBaseline="@+id/enableVehicleAcquisition"/>
+
+    <Button
+        android:id="@+id/viewInventory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/next_activity_button_label"
+        android:textSize="20sp"
+        android:layout_marginTop="20sp"
+        android:layout_below="@id/enableVehicleAcquisition"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

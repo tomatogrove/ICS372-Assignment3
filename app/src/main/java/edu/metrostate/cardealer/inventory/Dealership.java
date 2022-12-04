@@ -1,5 +1,6 @@
 package edu.metrostate.cardealer.inventory;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +44,7 @@ public class Dealership {
     public boolean isVehicleAcquisition() {
         return vehicleAcquisition;
     }
+    public void setVehicleAcquisition(boolean acquiring) {vehicleAcquisition = acquiring; }
 
     public boolean isRenting() { return isRenting; }
     public void setRenting(boolean renting) { isRenting = renting; }

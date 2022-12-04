@@ -14,12 +14,22 @@
         android:theme="@style/Theme.CarDealer"
         tools:targetApi="31">
         <activity
-            android:name=".activity.VehicleListActivity"
-            android:exported="false">
+            android:name=".activity.DealerInfoActivity"
+            android:exported="false"
+            android:label="@string/title_activity_dealer_info"
+            android:theme="@style/Theme.CarDealer.NoActionBar">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+                android:name=".activity.DealerListActivity"
+                android:exported="true">
+            <meta-data
+                    android:name="android.app.lib_name2"
+                    android:value="" />
+        </activity>
+
         <activity
             android:name=".activity.NewVehicleFormActivity"
             android:exported="false">
@@ -35,7 +45,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
