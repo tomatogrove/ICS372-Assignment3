@@ -6,13 +6,7 @@ import android.util.Log;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-import edu.metrostate.cardealer.inventory.Dealership;
-import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
-import edu.metrostate.cardealer.inventory.DealerGroup;
-import edu.metrostate.cardealer.inventory.Dealership;
 
 public class CarDealerApplication extends Application {
     private static File stateFile;

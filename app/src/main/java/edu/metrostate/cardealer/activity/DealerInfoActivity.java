@@ -1,9 +1,11 @@
 package edu.metrostate.cardealer.activity;
 
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.Button;
@@ -60,7 +62,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         Button exportJSON = findViewById(R.id.JSON);
         exportJSON.setOnClickListener(v -> {
             VehicleJSONParser.write(workingDealer);
-            //this is sending the application back to the DealerListActivity for some reason
+            showExportDialog();
         });
 
         //changing dealership name
@@ -105,7 +107,21 @@ public class DealerInfoActivity extends AppCompatActivity {
             intent.putExtra("workingDealerID", workingDealer.getDealerID());
             startActivity(intent);
         });
+    }
+
+    public void showExportDialog() {
+
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Export Confirmation")
+                .setCancelable(false)
+                .setTitle("JSON export")
+                .setMessage("Exported to JSON!")
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
+
 
 
     }
+
 }
