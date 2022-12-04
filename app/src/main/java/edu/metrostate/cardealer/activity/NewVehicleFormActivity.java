@@ -53,6 +53,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
         app = (CarDealerApplication) getApplication();
 
+
         // edit text
         vehicleID = findViewById(R.id.vehicle_id);
         dealershipID = findViewById(R.id.dealer_id);
@@ -81,6 +82,17 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
 
         // pattern from https://stackoverflow.com/questions/11134144/android-edittext-onchange-listener
+        vehicleID.addTextChangedListener(new TextChangedListener() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                super.afterTextChanged(s);
+                if (vehicleID.getText().toString().equals("")) {
+                    newVehicle.setVehicleID(null);
+                }
+                newVehicle.setVehicleID(vehicleID.getText().toString());
+            }
+        });
+
         dealershipID.addTextChangedListener(new TextChangedListener() {
             @Override
             public void afterTextChanged(Editable s) {
@@ -153,10 +165,12 @@ public class NewVehicleFormActivity extends AppCompatActivity{
                 if (!vehicleTypeValue.equals("sports car")) {
                     rented.setEnabled(true);
                 } else {
+                    if (rented.isChecked()) {
+                        rented.setChecked(false);
+                        showInvalidFieldDialog("Cannot rent out a vehicle that is a sports car.");
+                    }
                     rented.setEnabled(false);
-                    rented.setChecked(false);
                     newVehicle.setRented(false);
-                    showInvalidFieldDialog("Cannot rent out a vehicle that is a sports car.");
                 }
                 newVehicle.setVehicleType(vehicleTypeValue);
             }
@@ -173,8 +187,8 @@ public class NewVehicleFormActivity extends AppCompatActivity{
                 vehicle.add(newVehicle);
                 StateManager.dealerGroup.addIncomingVehicles(vehicle);
                 showSuccessDialog();
-                resetVehicle();
                 resetForm();
+                resetVehicle();
             } else {
                 showErrorDialog(errors);
             }
@@ -251,7 +265,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
                 errors.add("Dealer " + newVehicle.getDealershipID() + " is not renting out vehicles.\n");
             }
             if (dealer.getVehicleById(newVehicle.getVehicleID()) != null) {
-                errors.add("Dealer " + newVehicle.getDealershipID() + " already has vehicle " + newVehicle.getVehicleID());
+                errors.add("Dealer " + newVehicle.getDealershipID() + " already has vehicle " + newVehicle.getVehicleID() + ".\n");
             }
         }
         if (newVehicle.getVehicleModel() == null) {
@@ -282,6 +296,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         vehicleManufacturer.getText().clear();
         price.getText().clear();
         unit.setText("dollars");
+        rented.setChecked(false);
         LocalDate today = LocalDate.now();
         setAcquisitionDate.setText(String.format("%d/%d/%d", today.getMonthValue(), today.getDayOfMonth(), today.getYear()));
         vehicleTypeSpinner.setSelection(0);
