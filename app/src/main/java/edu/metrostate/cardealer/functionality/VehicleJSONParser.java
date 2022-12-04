@@ -36,7 +36,7 @@ public class VehicleJSONParser {
 
 	public static void write(Dealership dealer) {
 		String filePath = "./dealer" + dealer.getDealerID() + "Inventory.json";
-		File file = new File(filePath);
+		File file = new File(CarDealerApplication.getExportDirectory(), filePath);
 		try {
 			mapper.writerWithDefaultPrettyPrinter().writeValue(file, dealer);
 		} catch (IOException e) {

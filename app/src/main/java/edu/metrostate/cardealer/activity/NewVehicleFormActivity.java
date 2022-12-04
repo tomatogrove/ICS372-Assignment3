@@ -53,6 +53,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
         app = (CarDealerApplication) getApplication();
 
+
         // edit text
         vehicleID = findViewById(R.id.vehicle_id);
         dealershipID = findViewById(R.id.dealer_id);
@@ -186,8 +187,8 @@ public class NewVehicleFormActivity extends AppCompatActivity{
                 vehicle.add(newVehicle);
                 StateManager.dealerGroup.addIncomingVehicles(vehicle);
                 showSuccessDialog();
-                resetVehicle();
                 resetForm();
+                resetVehicle();
             } else {
                 showErrorDialog(errors);
             }
@@ -264,7 +265,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
                 errors.add("Dealer " + newVehicle.getDealershipID() + " is not renting out vehicles.\n");
             }
             if (dealer.getVehicleById(newVehicle.getVehicleID()) != null) {
-                errors.add("Dealer " + newVehicle.getDealershipID() + " already has vehicle " + newVehicle.getVehicleID() + "\n");
+                errors.add("Dealer " + newVehicle.getDealershipID() + " already has vehicle " + newVehicle.getVehicleID() + ".\n");
             }
         }
         if (newVehicle.getVehicleModel() == null) {

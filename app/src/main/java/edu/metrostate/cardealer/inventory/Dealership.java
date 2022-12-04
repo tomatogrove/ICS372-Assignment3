@@ -13,7 +13,7 @@ public class Dealership {
 
     public Dealership(){
         vehicleAcquisition = true;
-        isRenting = false;
+        isRenting = true;
         name = "N/A";
     }
 
