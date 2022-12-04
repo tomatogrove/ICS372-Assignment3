@@ -40,7 +40,6 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_import_file);
-        assets_copy();
         Button send_button= findViewById(R.id.send_data);
         send_button.setOnClickListener(v -> {
             Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
@@ -56,52 +55,6 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
         });
     }
 
-    private void assets_copy() {
-        AssetManager assetManager = getAssets();
-        String[] files = null;
-        try {
-            files = assetManager.list("");
-        } catch (IOException e) {
-            Log.e("tag", "Failed to get asset file list.", e);
-        }
-        if (files != null) for (String filename : files) {
-            InputStream in = null;
-            OutputStream out = null;
-            try {
-                in = assetManager.open(filename);
-                File outFile = new File(getExternalFilesDir(null), filename);
-                if (!(outFile.exists())) {
-                    out = new FileOutputStream(outFile);
-                    copy_storage(in, out);
-                }
-            } catch(IOException e) {
-                Log.e("tag", "Failed to copy asset file: " + filename, e);
-            }
-            finally {
-                if (in != null) {
-                    try {
-                        in.close();
-                    } catch (IOException e) {
-
-                    }
-                }
-                if (out != null) {
-                    try {
-                        out.close();
-                    } catch (IOException e) {
-
-                    }
-                }
-            }
-        }
-    }
-    private void copy_storage(InputStream in, OutputStream out) throws IOException {
-        byte[] buffer = new byte[1024];
-        int read;
-        while((read = in.read(buffer)) != -1){
-            out.write(buffer, 0, read);
-        }
-    }
 
     public void buttonJsonFile(View view){
 
@@ -150,7 +103,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                                 jsonField.setText(path);
 
                                 vehicleJson = VehicleJSONParser.read(file);
-                               StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
+                                StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
 
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
