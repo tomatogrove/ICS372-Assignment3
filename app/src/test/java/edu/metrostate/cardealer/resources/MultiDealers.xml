@@ -1,0 +1,48 @@
+<Dealers>
+	<Dealer id="1">
+		<Name>Wacky Dealer One</Name>
+		<Vehicle type="suv" id="a">
+			<Price unit="pounds">17000</Price>
+			<Make>Land Rover</Make>
+			<Model>Range Rover</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="b">
+			<Price unit="dollars">22600</Price>
+			<Make>Toyota</Make>
+			<Model>Tundra</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="c">
+			<Price unit="dollars">36600</Price>
+			<Make>Genesis</Make>
+			<Model>G70</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="d">
+			<Price unit="dollars">22330</Price>
+			<Make>Mazda</Make>
+			<Model>Miata</Model>
+		</Vehicle>
+	</Dealer>
+	<Dealer id="2">
+		<Name>Quirky Dealer Two</Name>
+		<Vehicle type="suv" id="1">
+			<Price unit="pounds">17000</Price>
+			<Make>Land Rover</Make>
+			<Model>Range Rover</Model>
+		</Vehicle>
+		<Vehicle type="pickup" id="2">
+			<Price unit="dollars">22600</Price>
+			<Make>Toyota</Make>
+			<Model>Tundra</Model>
+		</Vehicle>
+		<Vehicle type="sedan" id="3">
+			<Price unit="dollars">36600</Price>
+			<Make>Genesis</Make>
+			<Model>G70</Model>
+		</Vehicle>
+		<Vehicle type="sports car" id="4">
+			<Price unit="dollars">22330</Price>
+			<Make>Mazda</Make>
+			<Model>Miata</Model>
+		</Vehicle>
+	</Dealer>
+</Dealers>
