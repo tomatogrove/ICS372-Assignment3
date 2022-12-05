@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.Vehicle;
+import edu.metrostate.cardealer.inventory.Vehicle;
 
 public class VehicleAdapter extends ArrayAdapter<Vehicle> {
     public VehicleAdapter(Context context, List<Vehicle> shelterList) {
@@ -33,8 +33,8 @@ public class VehicleAdapter extends ArrayAdapter<Vehicle> {
         TextView model = convertView.findViewById(R.id.vehicle_model);
 
 
-        id.setText(getItem(position).getId());
-        model.setText(getItem(position).getModel());
+        id.setText(getItem(position).getVehicleID());
+        model.setText(getItem(position).getVehicleType());
 
         return convertView;
     }
