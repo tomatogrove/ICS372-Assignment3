@@ -25,7 +25,7 @@ public class Vehicle_ViewListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_vehicle_view_list);
 
         listview = findViewById(R.id.listview_list);
-
+        //get the list
         arrayAdapter = new VehicleAdapter(this);
         listview.setAdapter(arrayAdapter);
 

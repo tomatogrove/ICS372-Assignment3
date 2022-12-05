@@ -40,6 +40,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vehicle_import_file);
+        //button that redirects the dealer to view the list
         Button send_button= findViewById(R.id.send_data);
         send_button.setOnClickListener(v -> {
             Intent intent = new Intent(this, Vehicle_ViewListActivity.class);
@@ -55,7 +56,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
         });
     }
 
-
+    //launch file explorer for JSON FILE
     public void buttonJsonFile(View view){
 
         Intent data = new Intent(Intent.ACTION_GET_CONTENT);
@@ -63,6 +64,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
         data = Intent.createChooser(data, "Choose a File");
         jsonActivityResultLauncher.launch(data);
     }
+    //launch file explorer for XML file
     public void buttonXmlFile(View view){
 
         Intent data = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -71,7 +73,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
         xmlActivityResultLauncher.launch(data);
 
     }
-
+    //Parse and save the data into the state, check for file extension
     ActivityResultLauncher<Intent> jsonActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -116,6 +118,7 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                 }
             }
     );
+    //Parse and save the data into the state for XML
     ActivityResultLauncher<Intent> xmlActivityResultLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -137,10 +140,11 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         }
                         if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
                         {
-                            dealers = VehicleXMLParser.read(file);
-                            StateManager.dealerGroup.addIncomingDealers(dealers);
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
+                            dealers = VehicleXMLParser.read(file);
+                            StateManager.dealerGroup.addIncomingDealers(dealers);
+
                         }else{
                             final TextView errorField = findViewById(R.id.error_message);
                             errorField.setText("Wrong file format");
