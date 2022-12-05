@@ -13,8 +13,9 @@ import android.widget.ListView;
 
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.Vehicle;
+import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.adapter.VehicleAdapter;
+
 
 public class EditSpecificVehicle extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class EditSpecificVehicle extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Edit Rental Status");
         builder.setCancelable(true);
-        builder.setTitle("Vehicle ID: " + vehicle.getId());
+        builder.setTitle("Vehicle ID: " + vehicle.getVehicleID());
         builder.setMessage("Rental Status: " + vehicle.isRented());
         builder.setMessage("Press 'Update' to change the rental status");
         builder.setNegativeButton("Cancel",(dialog1, id) -> dialog1.cancel());
