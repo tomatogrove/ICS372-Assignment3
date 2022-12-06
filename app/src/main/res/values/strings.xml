@@ -22,4 +22,14 @@
     <string name="new_dealer_name_field">new dealer name</string>
     <string name="Change_Name_Button_Label">Change</string>
     <string name="next_activity_button_label">View Inventory</string>
+    <string name="btnxml">Import XML File</string>
+    <string name="btnjson">Import JSON File</string>
+    <string name="xmlpath">XML Path File</string>
+    <string name="jsonpath">Json Path File</string>
+    <string name="titleFrame">Select Vehicle List</string>
+    <string name="sendFileList">View All Vehicles</string>
+    <string name="titleFileList">Vehicle List</string>
+    <string name="clear_json_path">Clear</string>
+    <string name="clear_xml_path">Clear</string>
+    <string name="add_vehicle_btn">Add Vehicle</string>
 </resources>
