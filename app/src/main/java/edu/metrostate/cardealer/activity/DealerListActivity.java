@@ -48,6 +48,7 @@ public class DealerListActivity extends AppCompatActivity {
         });
     }
 
+    //Introduced to update Dealer Name displayed when changed in DealerInfoActivity.java
     @Override
     protected void onResume() {
         super.onResume();
