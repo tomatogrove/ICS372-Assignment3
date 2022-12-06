@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,7 +15,7 @@ import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.adapter.VehicleAdapter;
 
 
-public class EditSpecificVehicle extends AppCompatActivity {
+public class EditSpecificVehicleActivity extends AppCompatActivity {
 
     @SuppressLint("MissingInflatedId")
     @Override
