@@ -23,10 +23,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-//        findViewById(R.id.dealers).setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
-//            startActivity(intent);
-//        });
+        findViewById(R.id.dealers).setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
+            startActivity(intent);
+        });
 
     }
 }
