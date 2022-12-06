@@ -5,28 +5,43 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 import edu.metrostate.cardealer.R;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button vehicle;
+    private Button dealer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // these will change at least a little based on what is on the main screen
-        findViewById(R.id.show_vehicle).setOnClickListener(v -> {
-            // Create the intent with the new activity
-            Intent intent = new Intent(MainActivity.this, Vehicle_ImportFileActivity.class);
 
-            // Launch the new Activity
-            startActivity(intent);
+        vehicle = (Button) findViewById(R.id.all_vehicles);
+        vehicle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFileImport();
+            }
         });
 
-//        findViewById(R.id.dealers).setOnClickListener(v -> {
-//            Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
-//            startActivity(intent);
-//        });
+        dealer = (Button) findViewById(R.id.specific_dealer);
+        dealer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openDealer();
+            }
+        });
+    }
+    private void openFileImport() {
+        Intent intent = new Intent(this, Vehicle_ImportFileActivity.class);
+        startActivity(intent);
+    }
 
+    private void openDealer(){
+        Intent intent = new Intent(this, DealerInfoActivity.class);
+        startActivity(intent);
     }
 }

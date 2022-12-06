@@ -1,0 +1,36 @@
+{
+  "dealerID" : "123",
+  "vehicleAcquisition" : true,
+  "vehicleInventory" : [ {
+    "vehicleID" : "a",
+    "dealershipID" : "123",
+    "vehicleType" : "pickup",
+    "vehicleModel" : "Silverado",
+    "vehicleManufacturer" : "Chevy",
+    "unit" : "dollars",
+    "price" : 70444.0,
+    "acquisitionDate" : 1515354694451,
+    "rented" : false
+  }, {
+    "vehicleID" : "b",
+    "dealershipID" : "123",
+    "vehicleType" : "sedan",
+    "vehicleModel" : "Model 3",
+    "vehicleManufacturer" : "Tesla",
+    "unit" : "dollars",
+    "price" : 50444.0,
+    "acquisitionDate" : 1515354694451,
+    "rented" : false
+  }, {
+    "vehicleID" : "c",
+    "dealershipID" : "123",
+    "vehicleType" : "suv",
+    "vehicleModel" : "Explorer",
+    "vehicleManufacturer" : "Ford",
+    "unit" : "dollars",
+    "price" : 20123.0,
+    "acquisitionDate" : 1515354694451,
+    "rented" : false
+  } ],
+  "name" : "N/A"
+}
