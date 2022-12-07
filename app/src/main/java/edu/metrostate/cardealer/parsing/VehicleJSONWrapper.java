@@ -1,4 +1,4 @@
-package edu.metrostate.cardealer.functionality;
+package edu.metrostate.cardealer.parsing;
 
 import edu.metrostate.cardealer.inventory.Vehicle;
 

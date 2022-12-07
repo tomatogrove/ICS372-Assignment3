@@ -1,18 +1,25 @@
-package edu.metrostate.cardealer.functionality;
+package edu.metrostate.cardealer.parsing;
 
 import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
+import com.tickaroo.tikxml.annotation.Attribute;
+import com.tickaroo.tikxml.annotation.Element;
+import com.tickaroo.tikxml.annotation.PropertyElement;
+import com.tickaroo.tikxml.annotation.TextContent;
+import com.tickaroo.tikxml.annotation.Xml;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Xml(name = "Dealers")
 public class VehicleXMLWrapper {
 
     @JacksonXmlProperty(localName = "Dealer")
+    @Element
     private List<ImportedDealership> dealers;
 
     public VehicleXMLWrapper() { }
@@ -20,7 +27,7 @@ public class VehicleXMLWrapper {
     public List<ImportedDealership> getDealers() {
         return dealers;
     }
-    public void setDealer(List<ImportedDealership> dealers) {
+    public void setDealers(List<ImportedDealership> dealers) {
         this.dealers = dealers;
     }
 
@@ -40,15 +47,19 @@ public class VehicleXMLWrapper {
         return dealers;
     }
 
+    @Xml(name = "Dealer")
     public static class ImportedDealership {
         @JacksonXmlProperty(isAttribute = true)
+        @Attribute
         private String id;
 
         @JacksonXmlProperty(localName = "Name")
+        @PropertyElement(name = "Name")
         private String name;
 
         @JacksonXmlElementWrapper(useWrapping = false)
         @JacksonXmlProperty(localName = "Vehicle")
+        @Element
         private List<ImportedVehicle> vehicles;
 
         public ImportedDealership() { }
@@ -88,19 +99,25 @@ public class VehicleXMLWrapper {
         }
     }
 
+    @Xml(name = "Vehicle")
     public static class ImportedVehicle {
         @JacksonXmlProperty(isAttribute = true)
+        @Attribute
         private String type;
         @JacksonXmlProperty(isAttribute = true)
+        @Attribute
         private String id;
 
         @JacksonXmlProperty(localName = "Price")
+        @Element(name = "Price")
         private ImportedPrice importedPrice;
 
         @JacksonXmlProperty(localName = "Make")
+        @PropertyElement(name = "Make")
         private String make;
 
         @JacksonXmlProperty(localName = "Model")
+        @PropertyElement(name = "Model")
         private String model;
 
         public ImportedVehicle() { }
@@ -121,10 +138,13 @@ public class VehicleXMLWrapper {
         public void setModel(String model) { this.model = model; }
     }
 
+    @Xml(name = "Price")
     public static class ImportedPrice {
         @JacksonXmlProperty(isAttribute = true)
+        @Attribute
         private String unit;
         @JacksonXmlText
+        @TextContent
         private String price;
 
         public ImportedPrice() { }

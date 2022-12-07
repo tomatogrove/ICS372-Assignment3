@@ -48,4 +48,7 @@ dependencies {
     implementation 'com.fasterxml.jackson.core:jackson-annotations:2.13.4'
     implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.13.4'
     implementation 'javax.xml.stream:stax-api:1.0-2'
+    implementation 'com.tickaroo.tikxml:annotation:0.8.13'
+    implementation 'com.tickaroo.tikxml:core:0.8.13'
+    annotationProcessor 'com.tickaroo.tikxml:processor:0.8.13'
 }

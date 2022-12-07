@@ -1,11 +1,11 @@
 package edu.metrostate.cardealer.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -17,18 +17,14 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.List;
 
 
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.functionality.VehicleJSONParser;
-import edu.metrostate.cardealer.functionality.VehicleXMLParser;
 import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.parsing.AndroidVehicleXMLParser;
+import edu.metrostate.cardealer.parsing.VehicleJSONParser;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class Vehicle_ImportFileActivity extends AppCompatActivity {
@@ -99,13 +95,15 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         }
 
                         if (path != null) {
-                            if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("json"))
+                            if(path.substring(path.lastIndexOf(".") + 1).equals("json"))
                             {
                                 final TextView jsonField = findViewById(R.id.json_path);
                                 jsonField.setText(path);
 
                                 vehicleJson = VehicleJSONParser.read(file);
                                 StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
+
+                                showSuccessDialog();
 
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
@@ -138,12 +136,14 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         if (file != null) {
                             path = file.getAbsolutePath();
                         }
-                        if(path.substring(path.lastIndexOf(".") + 1, path.length()).equals("xml"))
+                        if(path.substring(path.lastIndexOf(".") + 1).equals("xml"))
                         {
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
-                            dealers = VehicleXMLParser.read(file);
+                            dealers = AndroidVehicleXMLParser.read(file);
                             StateManager.dealerGroup.addIncomingDealers(dealers);
+
+                            showSuccessDialog();
 
                         }else{
                             final TextView errorField = findViewById(R.id.error_message);
@@ -154,6 +154,16 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                 }
             }
     );
+
+    private void showSuccessDialog() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Save Success")
+                .setCancelable(false)
+                .setMessage("File successfully imported.")
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
+    }
 
     @Override
     protected void onPause() {
