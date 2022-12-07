@@ -26,8 +26,17 @@ public class Vehicle_ViewListActivity extends AppCompatActivity {
 
         listview = findViewById(R.id.listview_list);
         //get the list
-        arrayAdapter = new VehicleAdapter(this);
+        arrayAdapter = new VehicleAdapter(this, StateManager.dealerGroup.getAllVehicles());
         listview.setAdapter(arrayAdapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        arrayAdapter = new VehicleAdapter(this, StateManager.dealerGroup.getAllVehicles());
+        ListView vehicleList = findViewById(R.id.vehicle_list);
+        vehicleList.setAdapter(arrayAdapter);
     }
 }

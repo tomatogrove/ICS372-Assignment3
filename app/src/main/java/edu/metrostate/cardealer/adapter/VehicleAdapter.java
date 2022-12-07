@@ -17,8 +17,8 @@ import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class VehicleAdapter extends ArrayAdapter<Vehicle> {
-    public VehicleAdapter(Context context) {
-        super(context, R.layout.vehicle_item, StateManager.dealerGroup.getAllVehicles());
+    public VehicleAdapter(Context context, List<Vehicle> vehicles) {
+        super(context, R.layout.vehicle_item, vehicles);
     }
 
 

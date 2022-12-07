@@ -28,7 +28,7 @@
         android:text="All Vehicles" />
 
     <Button
-        android:id="@+id/specific_dealer"
+        android:id="@+id/dealerships"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dealerships"
