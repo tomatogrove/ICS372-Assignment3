@@ -71,8 +71,9 @@ public class DealerGroup {
 		for (Dealership dealer : dealers) {
 			Dealership oldDealer = getDealerByID(dealer.getDealerID());
 			if (oldDealer != null) {
-				String newName = dealer.getName();
-				oldDealer.setName(newName);
+				oldDealer.setName(dealer.getName());
+				oldDealer.setRenting(dealer.isRenting());
+				oldDealer.setVehicleAcquisition(dealer.isVehicleAcquisition());
 			} else {
 				this.dealers.add(dealer);
 			}
