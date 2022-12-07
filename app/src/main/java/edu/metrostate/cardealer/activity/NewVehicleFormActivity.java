@@ -184,7 +184,17 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             List<String> errors = validateVehicle();
             if (errors.size() == 0) {
                 List<Vehicle> vehicle = new ArrayList<>();
-                vehicle.add(newVehicle);
+                Vehicle vehicleToAdd = new Vehicle.VehicleBuilder()
+                        .setVehicleID(newVehicle.getVehicleID())
+                        .setDealershipID(newVehicle.getDealershipID())
+                        .setType(newVehicle.getVehicleType())
+                        .setModel(newVehicle.getVehicleModel())
+                        .setManufacturer(newVehicle.getVehicleManufacturer())
+                        .setPrice(newVehicle.getPrice())
+                        .setUnit(newVehicle.getUnit())
+                        .setAcquisitionDate(newVehicle.getAcquisitionDate())
+                        .build();
+                vehicle.add(vehicleToAdd);
                 StateManager.dealerGroup.addIncomingVehicles(vehicle);
                 showSuccessDialog();
                 resetForm();

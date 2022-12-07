@@ -113,4 +113,46 @@ public class Vehicle {
 		Vehicle vehicle = (Vehicle) o;
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
+
+	public static class VehicleBuilder {
+		private Vehicle vehicle;
+		public VehicleBuilder() {
+			vehicle = new Vehicle();
+		}
+		public VehicleBuilder setVehicleID(String vehicleID) {
+			vehicle.setVehicleID(vehicleID);
+			return this;
+		}
+		public VehicleBuilder setDealershipID(String dealerID) {
+			vehicle.setDealershipID(dealerID);
+			return this;
+		}
+		public VehicleBuilder setType(String type) {
+			vehicle.setVehicleType(type);
+			return this;
+		}
+		public VehicleBuilder setModel(String model) {
+			vehicle.setVehicleModel(model);
+			return this;
+		}
+		public VehicleBuilder setManufacturer(String manufacturer) {
+			vehicle.setVehicleManufacturer(manufacturer);
+			return this;
+		}
+		public VehicleBuilder setPrice(Double price) {
+			vehicle.setPrice(price);
+			return this;
+		}
+		public VehicleBuilder setUnit(String unit) {
+			vehicle.setUnit(unit);
+			return this;
+		}
+		public VehicleBuilder setAcquisitionDate(Date acquisitionDate) {
+			vehicle.setAcquisitionDate(acquisitionDate);
+			return this;
+		}
+		public Vehicle build() {
+			return vehicle;
+		}
+	}
 }
