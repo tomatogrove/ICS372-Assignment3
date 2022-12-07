@@ -38,10 +38,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openFileImport() {
-        Intent intent = new Intent(this, Vehicle_ImportFileActivity.class);
+        Intent intent = new Intent(MainActivity.this, Vehicle_ImportFileActivity.class);
         startActivity(intent);
     }
 
+    private void openDealer(){
+        Intent intent = new Intent(MainActivity.this, DealerListActivity.class);
+        startActivity(intent);
+    }
 
     private void getFilePermissions() {
         int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -54,10 +58,5 @@ public class MainActivity extends AppCompatActivity {
                     REQUEST_EXTERNAL_STORAGE
             );
         }
-    }
-
-    private void openDealer(){
-        Intent intent = new Intent(this, DealerListActivity.class);
-        startActivity(intent);
     }
 }

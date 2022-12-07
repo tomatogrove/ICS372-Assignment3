@@ -36,7 +36,6 @@ public class Vehicle_ViewListActivity extends AppCompatActivity {
         super.onResume();
 
         arrayAdapter = new VehicleAdapter(this, StateManager.dealerGroup.getAllVehicles());
-        ListView vehicleList = findViewById(R.id.vehicle_list);
-        vehicleList.setAdapter(arrayAdapter);
+        listview.setAdapter(arrayAdapter);
     }
 }

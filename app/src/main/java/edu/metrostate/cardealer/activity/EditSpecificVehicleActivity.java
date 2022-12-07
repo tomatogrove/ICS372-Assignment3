@@ -63,12 +63,13 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
     public void showDialog(Vehicle vehicle) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Edit Rental Status");
+        builder.setTitle("Edit Rental Status of Vehicle " + vehicle.getVehicleID());
         builder.setCancelable(true);
-        builder.setTitle("Vehicle ID: " + vehicle.getVehicleID());
-        builder.setMessage("Rental Status: " + vehicle.isRented());
-        builder.setMessage("Press 'Update' to change the rental status");
-        builder.setMessage("Sports Cars cannot be rented");
+        builder.setMessage(
+                "Rental Status: " + vehicle.isRented()
+                + "\nPress 'Update' to change the rental status "
+                + "\n INFO: Sports Cars cannot be rented"
+        );
         builder.setNegativeButton("Cancel",(dialog1, id) -> dialog1.cancel());
         builder.setPositiveButton( "Update", (dialog1, id) -> editRentalStatus(vehicle));
 
