@@ -23,6 +23,8 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
 
 
     VehicleAdapter adapter;
+    ListView vehicleList;
+    Dealership dealer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +32,19 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_specific_vehicle);
 
         String dealerID = getIntent().getStringExtra("workingDealerID");
-        Dealership dealer = StateManager.dealerGroup.getDealerByID(dealerID);
+        dealer = StateManager.dealerGroup.getDealerByID(dealerID);
 
 
         // Create an adapter for the list view
         adapter = new VehicleAdapter(this, dealer.getVehicleInventory());
 
         // Find the list view and add the adapter
-        ListView vehicleList = ((ListView)findViewById(R.id.listview_list));
+        vehicleList = ((ListView)findViewById(R.id.listview_list));
         vehicleList.setAdapter(adapter);
 
         vehicleList.setOnItemClickListener((parent, view, position, id) -> {
             if (dealer.isRenting()) {
                 showDialog(adapter.getItem(position));
-                adapter = new VehicleAdapter(this, dealer.getVehicleInventory());
             } else {
                 showRentingNotEnabledDialog();
             }
@@ -71,7 +72,11 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
                 + "\n INFO: Sports Cars cannot be rented"
         );
         builder.setNegativeButton("Cancel",(dialog1, id) -> dialog1.cancel());
-        builder.setPositiveButton( "Update", (dialog1, id) -> editRentalStatus(vehicle));
+        builder.setPositiveButton( "Update", (dialog1, id) -> {
+            editRentalStatus(vehicle);
+            adapter = new VehicleAdapter(this, dealer.getVehicleInventory());
+            vehicleList.setAdapter(adapter);
+        });
 
         AlertDialog dialog = builder.create();
         dialog.show();
