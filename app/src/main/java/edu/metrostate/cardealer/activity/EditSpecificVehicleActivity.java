@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.util.Objects;
+
 import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.inventory.Dealership;
@@ -44,16 +46,31 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
 
         vehicleList.setOnItemClickListener((parent, view, position, id) -> {
             if (dealer.isRenting()) {
-                showDialog(adapter.getItem(position));
+                Vehicle chosenVehicle = adapter.getItem(position);
+                if (Objects.equals(chosenVehicle.getVehicleType(), "sports car")) {
+                    showSportsCarDialog();
+                } else {
+                    showDialog(adapter.getItem(position));
+                }
             } else {
                 showRentingNotEnabledDialog();
             }
         });
     }
 
+    private void showSportsCarDialog() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Sports Car Warning")
+                .setCancelable(false)
+                .setMessage("Sports Cars cannot currently be rented out.")
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
+    }
+
     private void showRentingNotEnabledDialog() {
         Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Edit Rental Status")
+                .setTitle("Edit Dealer Rental Status")
                 .setCancelable(false)
                 .setMessage("Dealer does not have renting enabled. Please enable renting before changing vehicle rental status")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
@@ -69,7 +86,6 @@ public class EditSpecificVehicleActivity extends AppCompatActivity {
         builder.setMessage(
                 "Rental Status: " + vehicle.isRented()
                 + "\nPress 'Update' to change the rental status "
-                + "\n INFO: Sports Cars cannot be rented"
         );
         builder.setNegativeButton("Cancel",(dialog1, id) -> dialog1.cancel());
         builder.setPositiveButton( "Update", (dialog1, id) -> {
