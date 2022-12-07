@@ -1,4 +1,4 @@
-package edu.metrostate.cardealer.functionality;
+package edu.metrostate.cardealer.parsing;
 
 import java.io.File;
 import java.io.IOException;

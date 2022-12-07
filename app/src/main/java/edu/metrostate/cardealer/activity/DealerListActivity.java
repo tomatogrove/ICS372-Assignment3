@@ -2,17 +2,10 @@ package edu.metrostate.cardealer.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-//import android.app.AlertDialog;
-//import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.view.View;
-//import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.Serializable;
-
-import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.adapter.DealershipAdapter;
 import edu.metrostate.cardealer.storage.StateManager;
@@ -49,20 +42,4 @@ public class DealerListActivity extends AppCompatActivity {
 
 
     }
-    /*
-    public void showDialog(Dealership dealer) {
-
-        Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle("My alert")
-                .setCancelable(false)
-                .setTitle("Dealership ID: " + dealer.getDealerID())
-                .setMessage("Dealership Name: " + dealer.getName())
-                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
-
-        dialog.show();
-
-
-
-    }
-    */
 }

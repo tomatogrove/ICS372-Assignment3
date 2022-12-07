@@ -1,4 +1,4 @@
-package edu.metrostate.cardealer.functionality;
+package edu.metrostate.cardealer.parsing;
 
 
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
@@ -7,7 +7,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import edu.metrostate.cardealer.inventory.Dealership;

@@ -13,12 +13,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
-import java.io.Serializable;
-
-import edu.metrostate.cardealer.CarDealerApplication;
 import edu.metrostate.cardealer.R;
-import edu.metrostate.cardealer.functionality.VehicleJSONParser;
 import edu.metrostate.cardealer.inventory.Dealership;
+import edu.metrostate.cardealer.parsing.VehicleJSONParser;
 import edu.metrostate.cardealer.storage.StateManager;
 
 public class DealerInfoActivity extends AppCompatActivity {
