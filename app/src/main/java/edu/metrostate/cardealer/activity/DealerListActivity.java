@@ -39,6 +39,28 @@ public class DealerListActivity extends AppCompatActivity {
             intent.putExtra("workingDealerID", adapter.getItem(position).getDealerID());
             startActivity(intent);
         });
+    }
+
+    //Introduced to update Dealer Name displayed when changed in DealerInfoActivity.java
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_dealer_list);
+
+        // Create an adapter for the list view
+        DealershipAdapter adapter = new DealershipAdapter(this, StateManager.dealerGroup.getDealers());
+
+        // Find the list view and add the adapter
+        ListView dealerListAdapter = (findViewById(R.id.dealer_list));
+        dealerListAdapter.setAdapter(adapter);
+
+        dealerListAdapter.setOnItemClickListener((parent, view, position, id) -> {
+            //showDialog(adapter.getItem(position));
+            // Create the intent with the new activity
+            Intent intent = new Intent(DealerListActivity.this, DealerInfoActivity.class);
+            intent.putExtra("workingDealerID", adapter.getItem(position).getDealerID());
+            startActivity(intent);
+        });
 
 
     }

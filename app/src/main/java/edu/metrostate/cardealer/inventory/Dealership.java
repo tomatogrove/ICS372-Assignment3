@@ -76,14 +76,6 @@ public class Dealership {
         return null;
     }
 
-    public void enableDealerVehicleAcquisition() {
-        this.vehicleAcquisition = true;
-    }
-
-    public void disableDealerVehicleAcquisition() {
-        this.vehicleAcquisition = false;
-    }
-
     @Override
     public String toString() {
         StringBuilder inventory = new StringBuilder("  Dealer: " + getDealerID() + "\tName: " + getName() + "\n");

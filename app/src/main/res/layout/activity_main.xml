@@ -31,7 +31,7 @@
         android:id="@+id/specific_dealer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Specific Dealer"
+        android:text="Dealerships"
         android:layout_toEndOf="@+id/all_vehicles"
         android:layout_alignBaseline="@+id/all_vehicles"
         android:layout_marginStart="60sp" />
@@ -46,4 +46,5 @@
         android:layout_marginTop="-2dp"
         app:srcCompat="@drawable/dealerlogo" />
 
-</RelativeLayout >
+
+</RelativeLayout>

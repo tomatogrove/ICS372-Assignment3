@@ -31,10 +31,11 @@ public class DealerInfoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dealer_info);
+        //Getting the DealerID of the dealership object selected from DealerListActivity.java
         Bundle selectedDealer = getIntent().getExtras();
         Dealership workingDealer = StateManager.dealerGroup.getDealerByID(selectedDealer.getString("workingDealerID"));
 
-
+        //TextViews at the top to show details about the selected Dealership
         TextView dealerID = findViewById(R.id.dealerID);
         dealerID.setText(getString(R.string.Dealer_ID, workingDealer.getDealerID()));
         TextView dealerName = findViewById(R.id.dealerName);
@@ -49,6 +50,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         TextView dealerExport = findViewById(R.id.dealerExport);
         dealerExport.setText(getString(R.string.Dealer_Export));
 
+        //Button and EditTexts that change a Dealership's details
         //transferring inventory
         EditText transferInventory = findViewById(R.id.recipient);
         Button transfer = findViewById(R.id.transferTo);

@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openDealer(){
-        Intent intent = new Intent(this, DealerInfoActivity.class);
+        Intent intent = new Intent(this, DealerListActivity.class);
         startActivity(intent);
     }
 }
