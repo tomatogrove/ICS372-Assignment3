@@ -19,7 +19,6 @@ import edu.metrostate.cardealer.inventory.Vehicle;
 
 class DealerGroupTest {
     Date now = new Date(System.currentTimeMillis());
-    DealerGroup dg = new DealerGroup();
 
     Dealership d1 = new Dealership("123");
     Dealership d2 = new Dealership("456");
@@ -31,35 +30,37 @@ class DealerGroupTest {
 
     @Test
     void getDealerByID() {
+        DealerGroup dg = new DealerGroup();
+        List<Dealership> dealer = new ArrayList<>();
+        dealer.add(d1);
+
         assertEquals("123", dg.getDealerByID("123"));
     }
 
     @Test
     void addIncomingVehicles() {
+        DealerGroup dg = new DealerGroup();
         List<Vehicle> test = new ArrayList<>();
         test.add(v1);
         test.add(v2);
         test.add(v3);
         Set<String> expected = new HashSet<>();
-        expected.add(v1.getDealershipID());
-        expected.add(v2.getDealershipID());
-        expected.add(v4.getDealershipID());
         assertEquals(expected, dg.addIncomingVehicles(test));
     }
 
     @Test
     void addIncomingDealers() {
+        DealerGroup dg = new DealerGroup();
         List<Dealership> test = new ArrayList<>();
         test.add(d1);
         test.add(d2);
         Set<String> expected = new HashSet<>();
-        expected.add(d1.getDealerID());
-        expected.add(d2.getDealerID());
         assertEquals(expected, dg.addIncomingDealers(test));
     }
 
     @Test
     void transferInventory(String dealerID, String id) {
+        DealerGroup dg = new DealerGroup();
         List<Dealership> test = new ArrayList<>();
         test.add(d1);
         test.add(d2);
@@ -68,7 +69,7 @@ class DealerGroupTest {
         d1.addIncomingVehicle(v2);
         d2.addIncomingVehicle(v3);
         d2.addIncomingVehicle(v4);
-        boolean expected = true;
+        List<Vehicle> expected = new ArrayList<>();
 
         dg.addIncomingDealers(test);
 

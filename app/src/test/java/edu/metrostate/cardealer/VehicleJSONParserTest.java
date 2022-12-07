@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import edu.metrostate.cardealer.functionality.VehicleJSONParser;
 import edu.metrostate.cardealer.inventory.DealerGroup;
 import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.parsing.VehicleJSONParser;
 
 class VehicleJSONParserTest {
 
@@ -104,7 +104,10 @@ class VehicleJSONParserTest {
         dealer2.addIncomingVehicle(new Vehicle("c", "2", "sedan", "G70", "Genesis", 36600.0, "dollars", now));
         dealer2.addIncomingVehicle(new Vehicle("d", "2", "sports car", "Miata", "Mazda", 22330.0, "dollars", now));
 
-        dealerGroup.getDealers().addAll(List.of(dealer1, dealer2));
+        List<Dealership> dealers = new ArrayList<>();
+        dealers.add(dealer1);
+        dealers.add(dealer2);
+        dealerGroup.getDealers().addAll(dealers);
 
         return dealerGroup;
     }

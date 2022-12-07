@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import edu.metrostate.cardealer.functionality.VehicleXMLParser;
 import edu.metrostate.cardealer.inventory.Dealership;
 import edu.metrostate.cardealer.inventory.Vehicle;
+import edu.metrostate.cardealer.parsing.AndroidVehicleXMLParser;
 
 class VehicleXMLParserTest {
 
@@ -24,7 +24,7 @@ class VehicleXMLParserTest {
 
     @Test
     void readOneDealer() {
-        List<Dealership> readDealer = VehicleXMLParser.read(READ_FILE_ONE);
+        List<Dealership> readDealer = AndroidVehicleXMLParser.read(READ_FILE_ONE);
 
         assertEquals(readDealer.get(0).getDealerID(), DEALER.getDealerID());
 
@@ -42,13 +42,13 @@ class VehicleXMLParserTest {
 
     @Test
     void readFake() {
-        List<Dealership> readDealers = VehicleXMLParser.read(FAKE_PATH);
+        List<Dealership> readDealers = AndroidVehicleXMLParser.read(FAKE_PATH);
         assertEquals(readDealers.size(), 0);
     }
 
     @Test
     void readManyDealers() {
-        List<Dealership> readDealers = VehicleXMLParser.read(READ_FILE_MULTI);
+        List<Dealership> readDealers = AndroidVehicleXMLParser.read(READ_FILE_MULTI);
 
         for (int i = 0; i < DEALERS.size(); i++) {
 
@@ -93,7 +93,10 @@ class VehicleXMLParserTest {
         dealer2.addIncomingVehicle(new Vehicle("3", "485", "sedan", "G70", "Genesis", 36600.0, "dollars", now));
         dealer2.addIncomingVehicle(new Vehicle("4", "485", "sports car", "Miata", "Mazda", 22330.0, "dollars", now));
 
-        return new ArrayList<>(List.of(dealer1, dealer2));
+        List<Dealership> dealers = new ArrayList<>();
+        dealers.add(dealer1);
+        dealers.add(dealer2);
+        return dealers;
     }
 
 }
