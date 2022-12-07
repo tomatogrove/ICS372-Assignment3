@@ -102,7 +102,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         //Navigating to the next screen
         Button nextScreen = findViewById(R.id.viewInventory);
         nextScreen.setOnClickListener(v -> {
-            Intent intent = new Intent(DealerInfoActivity.this, VehicleListActivity.class);
+            Intent intent = new Intent(DealerInfoActivity.this, EditSpecificVehicleActivity.class);
             intent.putExtra("workingDealerID", workingDealer.getDealerID());
             startActivity(intent);
         });
