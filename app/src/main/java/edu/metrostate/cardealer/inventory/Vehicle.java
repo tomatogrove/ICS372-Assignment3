@@ -42,6 +42,7 @@ public class Vehicle {
 		rented = false;
 	}
 
+
 	public String getVehicleID() {
 		return vehicleID;
 	}

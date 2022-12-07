@@ -9,6 +9,8 @@ import java.nio.file.Files;
 
 import edu.metrostate.cardealer.storage.StateManager;
 
+import edu.metrostate.cardealer.inventory.Vehicle;
+
 public class CarDealerApplication extends Application {
     private static File stateFile;
     private static File externalDir;

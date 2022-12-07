@@ -10,6 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.List;
+
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.storage.StateManager;
