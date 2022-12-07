@@ -1,6 +1,5 @@
 package edu.metrostate.cardealer.inventory;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -92,8 +91,15 @@ public class Dealership {
         return inventory.toString();
     }
 
-    public void clearInventory() {
-        vehicleInventory.clear();
+    public List<Vehicle> clearInventory() {
+        List<Vehicle> newVehicles = new ArrayList<>();
+        for (Vehicle vehicle : vehicleInventory) {
+            if (vehicle.isRented()) {
+                newVehicles.add(vehicle);
+            }
+        }
+        vehicleInventory = newVehicles;
+        return newVehicles;
     }
 
     public boolean isVehicleRented(Vehicle vehicle) {

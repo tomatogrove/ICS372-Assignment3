@@ -13,8 +13,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 
+import java.util.List;
+
 import edu.metrostate.cardealer.R;
 import edu.metrostate.cardealer.inventory.Dealership;
+import edu.metrostate.cardealer.inventory.Vehicle;
 import edu.metrostate.cardealer.parsing.VehicleJSONParser;
 import edu.metrostate.cardealer.storage.StateManager;
 
@@ -54,7 +57,16 @@ public class DealerInfoActivity extends AppCompatActivity {
         //transferring inventory
         EditText transferInventory = findViewById(R.id.recipient);
         Button transfer = findViewById(R.id.transferTo);
-        transfer.setOnClickListener(v -> StateManager.dealerGroup.transferInventory(workingDealer.getDealerID(), transferInventory.getText().toString()));
+        transfer.setOnClickListener(v -> {
+            Dealership dealer2 = StateManager.dealerGroup.getDealerByID(transferInventory.getText().toString());
+            if (dealer2 != null && !workingDealer.getDealerID().equals(dealer2.getDealerID())
+                && dealer2.isVehicleAcquisition()) {
+                List<Vehicle> vehicles = StateManager.dealerGroup.transferInventory(workingDealer.getDealerID(), dealer2.getDealerID());
+                showTransferSuccessDialog(vehicles);
+            } else {
+                showTransferFailureDialog();
+            }
+        });
 
 
         //exporting inventory information to JSON
@@ -108,19 +120,44 @@ public class DealerInfoActivity extends AppCompatActivity {
         });
     }
 
+    private void showTransferFailureDialog() {
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setCancelable(false)
+                .setTitle("Transfer Failed")
+                .setMessage("Could not transfer to chosen dealer. Please ensure dealer"
+                        + "\n exists, is accepting vehicles, and is not the same as the current dealer.")
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
+    }
+
+    private void showTransferSuccessDialog(List<Vehicle> vehicles) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Non-rented vehicles transferred!");
+        if (vehicles.size() > 0) {
+            builder.append("\n\nThe following vehicles are currently rented and cannot be transferred:");
+            for (Vehicle vehicle : vehicles) {
+                builder.append("\nVehicle ").append(vehicle.getVehicleID());
+            }
+        }
+        Dialog dialog = new AlertDialog.Builder(this)
+                .setTitle("Transfer Succeeded!")
+                .setCancelable(false)
+                .setMessage(builder)
+                .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
+
+        dialog.show();
+    }
+
     public void showExportDialog() {
 
         Dialog dialog = new AlertDialog.Builder(this)
-                .setTitle("Export Confirmation")
                 .setCancelable(false)
                 .setTitle("JSON export")
                 .setMessage("Exported to JSON!")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();
-
-
-
     }
 
 }
