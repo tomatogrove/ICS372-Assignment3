@@ -154,7 +154,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         Dialog dialog = new AlertDialog.Builder(this)
                 .setCancelable(false)
                 .setTitle("JSON export")
-                .setMessage("Exported to JSON!")
+                .setMessage("Exported JSON file to downloads!")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();

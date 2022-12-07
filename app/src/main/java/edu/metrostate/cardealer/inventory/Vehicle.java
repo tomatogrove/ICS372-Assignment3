@@ -114,40 +114,40 @@ public class Vehicle {
 		return vehicleID.equals(vehicle.vehicleID) && dealershipID.equals(vehicle.dealershipID);
 	}
 
-	public static class VehicleBuilder {
+	public static class Builder {
 		private Vehicle vehicle;
-		public VehicleBuilder() {
+		public Builder() {
 			vehicle = new Vehicle();
 		}
-		public VehicleBuilder setVehicleID(String vehicleID) {
+		public Builder setVehicleID(String vehicleID) {
 			vehicle.setVehicleID(vehicleID);
 			return this;
 		}
-		public VehicleBuilder setDealershipID(String dealerID) {
+		public Builder setDealershipID(String dealerID) {
 			vehicle.setDealershipID(dealerID);
 			return this;
 		}
-		public VehicleBuilder setType(String type) {
+		public Builder setType(String type) {
 			vehicle.setVehicleType(type);
 			return this;
 		}
-		public VehicleBuilder setModel(String model) {
+		public Builder setModel(String model) {
 			vehicle.setVehicleModel(model);
 			return this;
 		}
-		public VehicleBuilder setManufacturer(String manufacturer) {
+		public Builder setManufacturer(String manufacturer) {
 			vehicle.setVehicleManufacturer(manufacturer);
 			return this;
 		}
-		public VehicleBuilder setPrice(Double price) {
+		public Builder setPrice(Double price) {
 			vehicle.setPrice(price);
 			return this;
 		}
-		public VehicleBuilder setUnit(String unit) {
+		public Builder setUnit(String unit) {
 			vehicle.setUnit(unit);
 			return this;
 		}
-		public VehicleBuilder setAcquisitionDate(Date acquisitionDate) {
+		public Builder setAcquisitionDate(Date acquisitionDate) {
 			vehicle.setAcquisitionDate(acquisitionDate);
 			return this;
 		}

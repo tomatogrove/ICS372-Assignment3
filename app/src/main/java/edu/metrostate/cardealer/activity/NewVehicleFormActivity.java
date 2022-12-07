@@ -184,7 +184,8 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             List<String> errors = validateVehicle();
             if (errors.size() == 0) {
                 List<Vehicle> vehicle = new ArrayList<>();
-                Vehicle vehicleToAdd = new Vehicle.VehicleBuilder()
+                // builder added to ensure activity does not hold on to reference of vehicle in dealerGroup
+                Vehicle vehicleToAdd = new Vehicle.Builder()
                         .setVehicleID(newVehicle.getVehicleID())
                         .setDealershipID(newVehicle.getDealershipID())
                         .setType(newVehicle.getVehicleType())

@@ -1,6 +1,7 @@
 package edu.metrostate.cardealer;
 
 import android.app.Application;
+import android.os.Environment;
 import android.util.Log;
 
 import java.io.File;
@@ -34,8 +35,8 @@ public class CarDealerApplication extends Application {
     }
 
     private void setStateFile() {
-        externalDir = getExternalFilesDir(null);
-        File outputFile = new File(externalDir, "programState.json");
+        externalDir = new File(Environment.getExternalStorageDirectory(), "/Download");
+        File outputFile = new File(getExternalFilesDir(null), "programState.json");
 
         if (!(outputFile.exists() && outputFile.isFile())) {
             try {
