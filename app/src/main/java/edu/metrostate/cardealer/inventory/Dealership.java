@@ -21,7 +21,7 @@ public class Dealership {
         this.name = name;
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
-        isRenting = false;
+        isRenting = true;
     }
 
     public Dealership(String newDealer) {
@@ -29,7 +29,7 @@ public class Dealership {
         name = "Unknown";
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
-        isRenting = false;
+        isRenting = true;
     }
 
     public String getName() { return name; }
