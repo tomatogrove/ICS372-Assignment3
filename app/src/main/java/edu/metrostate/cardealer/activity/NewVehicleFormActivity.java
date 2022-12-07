@@ -213,7 +213,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
 
         // https://stackoverflow.com/questions/39916178/how-to-show-datepickerdialog-on-button-click
         datePickerDialog.setOnDateSetListener((datePicker, year, month, day) -> {
-            setAcquisitionDate.setText(String.format("%d/%d/%d", month, day, year));
+            setAcquisitionDate.setText(String.format("%d/%d/%d", month + 1, day, year));
             LocalDate localDate = LocalDate.of(year, month, day);
             Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             newVehicle.setAcquisitionDate(date);
