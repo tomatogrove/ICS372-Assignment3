@@ -58,7 +58,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         EditText transferInventory = findViewById(R.id.recipient);
         Button transfer = findViewById(R.id.transferTo);
         transfer.setOnClickListener(v -> {
-            Dealership dealer2 = StateManager.dealerGroup.getDealerByID(transferInventory.getText().toString());
+            Dealership dealer2 = StateManager.dealerGroup.getDealerByID(transferInventory.getText().toString().trim());
             if (dealer2 != null && !workingDealer.getDealerID().equals(dealer2.getDealerID())
                 && dealer2.isVehicleAcquisition()) {
                 List<Vehicle> vehicles = StateManager.dealerGroup.transferInventory(workingDealer.getDealerID(), dealer2.getDealerID());
@@ -81,7 +81,7 @@ public class DealerInfoActivity extends AppCompatActivity {
         Button changeName = findViewById(R.id.changeName);
         changeName.setOnClickListener(v -> {
 
-            workingDealer.setName(newName.getText().toString());
+            workingDealer.setName(newName.getText().toString().trim());
             dealerName.setText(getString(R.string.Dealer_Name, workingDealer.getName()));
         });
 
@@ -125,7 +125,7 @@ public class DealerInfoActivity extends AppCompatActivity {
                 .setCancelable(false)
                 .setTitle("Transfer Failed")
                 .setMessage("Could not transfer to chosen dealer. Please ensure dealer"
-                        + "\n exists, is accepting vehicles, and is not the same as the current dealer.")
+                        + " exists, is accepting vehicles, and is not the same as the current dealer.")
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();

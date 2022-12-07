@@ -86,10 +86,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (vehicleID.getText().toString().equals("")) {
+                if (vehicleID.getText().toString().trim().equals("")) {
                     newVehicle.setVehicleID(null);
+                } else {
+                    newVehicle.setVehicleID(vehicleID.getText().toString().trim());
                 }
-                newVehicle.setVehicleID(vehicleID.getText().toString());
             }
         });
 
@@ -97,10 +98,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (dealershipID.getText().toString().equals("")) {
+                if (dealershipID.getText().toString().trim().equals("")) {
                     newVehicle.setDealershipID(null);
+                } else {
+                    newVehicle.setDealershipID(dealershipID.getText().toString().trim());
                 }
-                newVehicle.setDealershipID(dealershipID.getText().toString());
             }
         });
 
@@ -109,10 +111,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (vehicleModel.getText().toString().equals("")) {
+                if (vehicleModel.getText().toString().trim().equals("")) {
                     newVehicle.setVehicleModel(null);
+                } else {
+                    newVehicle.setVehicleModel(vehicleModel.getText().toString().trim());
                 }
-                newVehicle.setVehicleModel(vehicleModel.getText().toString());
             }
         });
 
@@ -120,10 +123,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (vehicleManufacturer.getText().toString().equals("")) {
+                if (vehicleManufacturer.getText().toString().trim().equals("")) {
                     newVehicle.setVehicleManufacturer(null);
+                } else {
+                    newVehicle.setVehicleManufacturer(vehicleManufacturer.getText().toString().trim());
                 }
-                newVehicle.setVehicleManufacturer(vehicleManufacturer.getText().toString());
             }
         });
 
@@ -131,10 +135,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (unit.getText().toString().equals("")) {
+                if (unit.getText().toString().trim().equals("")) {
                     newVehicle.setUnit(null);
+                } else {
+                    newVehicle.setUnit(unit.getText().toString().trim());
                 }
-                newVehicle.setUnit(unit.getText().toString());
             }
         });
 
@@ -142,11 +147,11 @@ public class NewVehicleFormActivity extends AppCompatActivity{
             @Override
             public void afterTextChanged(Editable s) {
                 super.afterTextChanged(s);
-                if (price.getText().toString().equals("")) {
+                if (price.getText().toString().trim().equals("")) {
                     newVehicle.setPrice(null);
                 } else {
                     try {
-                        newVehicle.setPrice(Double.valueOf(price.getText().toString()));
+                        newVehicle.setPrice(Double.valueOf(price.getText().toString().trim()));
                     } catch (NumberFormatException e) {
                         showInvalidFieldDialog("Value entered is not a valid price!");
                     }
@@ -215,7 +220,7 @@ public class NewVehicleFormActivity extends AppCompatActivity{
         // https://stackoverflow.com/questions/39916178/how-to-show-datepickerdialog-on-button-click
         datePickerDialog.setOnDateSetListener((datePicker, year, month, day) -> {
             setAcquisitionDate.setText(String.format("%d/%d/%d", month + 1, day, year));
-            LocalDate localDate = LocalDate.of(year, month, day);
+            LocalDate localDate = LocalDate.of(year, month + 1, day);
             Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
             newVehicle.setAcquisitionDate(date);
         });
