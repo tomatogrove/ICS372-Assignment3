@@ -16,7 +16,7 @@
     <string name="Dealer_Rent_Ability"><u>"Rent"</u></string>
     <string name="enable">enable</string>
     <string name="disable">disable</string>
-    <string name="receiving_dealer_field">receiving dealer</string>
+    <string name="receiving_dealer_field">receiving dealer ID</string>
     <string name="transfer_button_label">Transfer</string>
     <string name="export_button_label">JSON</string>
     <string name="new_dealer_name_field">new dealer name</string>
