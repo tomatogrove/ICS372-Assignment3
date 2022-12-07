@@ -26,7 +26,7 @@
     <string name="btnjson">Import JSON File</string>
     <string name="xmlpath">XML Path File</string>
     <string name="jsonpath">Json Path File</string>
-    <string name="titleFrame">Select Vehicle List</string>
+    <string name="titleFrame">Add Additional Inventory</string>
     <string name="sendFileList">View All Vehicles</string>
     <string name="titleFileList">Vehicle List</string>
     <string name="clear_json_path">Clear</string>

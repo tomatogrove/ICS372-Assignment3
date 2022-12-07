@@ -18,22 +18,22 @@
         android:textSize="34sp" />
 
     <Button
-        android:id="@+id/all_vehicles"
+        android:id="@+id/vehicles"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_marginStart="19dp"
         android:layout_marginBottom="164dp"
-        android:text="All Vehicles" />
+        android:text="Vehicles" />
 
     <Button
         android:id="@+id/dealerships"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Dealerships"
-        android:layout_toEndOf="@+id/all_vehicles"
-        android:layout_alignBaseline="@+id/all_vehicles"
+        android:layout_toEndOf="@+id/vehicles"
+        android:layout_alignBaseline="@+id/vehicles"
         android:layout_marginStart="60sp" />
 
     <ImageView

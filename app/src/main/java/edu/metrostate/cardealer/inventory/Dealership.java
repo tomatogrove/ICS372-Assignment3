@@ -13,7 +13,7 @@ public class Dealership {
     public Dealership(){
         vehicleAcquisition = true;
         isRenting = true;
-        name = "N/A";
+        name = "Unknown";
     }
 
     public Dealership(String dealerID, String name) {
@@ -26,7 +26,7 @@ public class Dealership {
 
     public Dealership(String newDealer) {
         dealerID = newDealer;
-        name = "N/A";
+        name = "Unknown";
         vehicleAcquisition = true;
         vehicleInventory = new ArrayList<>();
         isRenting = false;

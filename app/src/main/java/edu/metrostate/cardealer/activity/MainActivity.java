@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        vehicle = (Button) findViewById(R.id.all_vehicles);
+        vehicle = (Button) findViewById(R.id.vehicles);
         vehicle.setOnClickListener(v -> openFileImport());
 
         dealer = (Button) findViewById(R.id.dealerships);
