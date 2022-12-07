@@ -21,14 +21,14 @@ public class VehicleJSONParser {
 
 	public static List<Vehicle> read(File file) {
 		List<Vehicle> vehicleList = new ArrayList<>();
-		if (file.length() > 0) {
-			try {
-				vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getVehicles();
-			} catch (IOException e) {
-				e.printStackTrace();
-				return vehicleList;
-			}
+
+		try {
+			vehicleList = mapper.readValue(file, VehicleJSONWrapper.class).getVehicles();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return vehicleList;
 		}
+
 
 		return vehicleList;
 	}

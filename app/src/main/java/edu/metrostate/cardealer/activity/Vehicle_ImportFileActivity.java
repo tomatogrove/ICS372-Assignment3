@@ -3,9 +3,13 @@ package edu.metrostate.cardealer.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.ContentProvider;
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,9 +19,12 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Set;
 
 
 import edu.metrostate.cardealer.R;
@@ -55,8 +62,9 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     //launch file explorer for JSON FILE
     public void buttonJsonFile(View view){
 
-        Intent data = new Intent(Intent.ACTION_GET_CONTENT);
-        data.setType("*/*");
+        Intent data = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        data.addCategory(Intent.CATEGORY_OPENABLE);
+        data.setType("application/json");
         data = Intent.createChooser(data, "Choose a File");
         jsonActivityResultLauncher.launch(data);
     }
@@ -64,7 +72,8 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
     public void buttonXmlFile(View view){
 
         Intent data = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        data.setType("*/*");
+        data.addCategory(Intent.CATEGORY_OPENABLE);
+        data.setType("text/*");
         data = Intent.createChooser(data, "Choose a File");
         xmlActivityResultLauncher.launch(data);
 
@@ -81,13 +90,16 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         Intent data = result.getData();
 
 
+
                         Uri uri = null;
                         if (data != null) {
                             uri = data.getData();
                         }
                         File file = null;
                         if (uri != null) {
-                            file = new File(uri.getPath());
+
+                            String path = Environment.getExternalStorageDirectory() + "/" + uri.getPath().split(":")[1];
+                            file = new File(path);
                         }
                         path = null;
                         if (file != null) {
@@ -101,9 +113,9 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                                 jsonField.setText(path);
 
                                 vehicleJson = VehicleJSONParser.read(file);
-                                StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
+                                Set<String> disabledDealers = StateManager.dealerGroup.addIncomingVehicles(vehicleJson);
 
-                                showSuccessDialog();
+                                showSuccessDialog(disabledDealers);
 
                             }else{
                                 final TextView errorField = findViewById(R.id.error_message);
@@ -131,7 +143,8 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                         }
                         File file = null;
                         if (uri != null) {
-                            file = new File(uri.getPath());
+                            String path = Environment.getExternalStorageDirectory() + "/" + uri.getPath().split(":")[1];
+                            file = new File(path);
                         }
                         if (file != null) {
                             path = file.getAbsolutePath();
@@ -141,9 +154,9 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
                             final TextView xmlField = findViewById(R.id.xml_path);
                             xmlField.setText(path);
                             dealers = AndroidVehicleXMLParser.read(file);
-                            StateManager.dealerGroup.addIncomingDealers(dealers);
+                            Set<String> disabledDealers = StateManager.dealerGroup.addIncomingDealers(dealers);
 
-                            showSuccessDialog();
+                            showSuccessDialog(disabledDealers);
 
                         }else{
                             final TextView errorField = findViewById(R.id.error_message);
@@ -155,11 +168,19 @@ public class Vehicle_ImportFileActivity extends AppCompatActivity {
             }
     );
 
-    private void showSuccessDialog() {
+    private void showSuccessDialog(Set<String> disabledDealers) {
+        StringBuilder builder = new StringBuilder();
+        builder.append("File successfully imported.");
+        if (disabledDealers.size() > 0) {
+            builder.append("\n\nThe following dealers have disabled vehicle acquisition:");
+            for (String dealer : disabledDealers) {
+                builder.append("\nDealer ").append(dealer);
+            }
+        }
         Dialog dialog = new AlertDialog.Builder(this)
                 .setTitle("Save Success")
                 .setCancelable(false)
-                .setMessage("File successfully imported.")
+                .setMessage(builder)
                 .setPositiveButton( "OK", (dialog1, id) -> dialog1.dismiss()).create();
 
         dialog.show();
