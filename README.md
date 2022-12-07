@@ -4,7 +4,7 @@
 These files should be located within the *AdditionalFiles* folder
 
 ## Starting the Program
-The Application file is located is called *CarDealerApplication*
+The Application file is called *CarDealerApplication*
 
 On first startup, the program will ask for storage management permissions. If those are not allowed the app will not import/export files properly.
 
